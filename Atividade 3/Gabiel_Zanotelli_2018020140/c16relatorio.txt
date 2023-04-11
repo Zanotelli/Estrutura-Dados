@@ -1,0 +1,42 @@
+ERRO
+
+==224== Memcheck, a memory error detector
+==224== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==224== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==224== Command: ./c
+==224==
+==224== 
+==224== Process terminating with default action of signal 8 (SIGFPE)
+==224==  Integer divide by zero at address 0x1002D86F81
+==224==    at 0x10913B: actual_calc (c16correto.c:6)
+==224==    by 0x109170: calc (c16correto.c:15)
+==224==    by 0x109189: main (c16correto.c:20)
+==224==
+==224== HEAP SUMMARY:
+==224==     in use at exit: 0 bytes in 0 blocks
+==224==   total heap usage: 0 allocs, 0 frees, 0 bytes allocated
+==224==
+==224== All heap blocks were freed -- no leaks are possible
+==224==
+==224== For lists of detected and suppressed errors, rerun with: -s
+==224== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+Floating point exception
+
+ANÁLISE
+
+Foi adicionada uma verificação para impedir que o programa divida por 0
+
+==230== Memcheck, a memory error detector
+==230== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==230== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==230== Command: ./c
+==230==
+==230== 
+==230== HEAP SUMMARY:
+==230==     in use at exit: 0 bytes in 0 blocks
+==230==   total heap usage: 0 allocs, 0 frees, 0 bytes allocated
+==230==
+==230== All heap blocks were freed -- no leaks are possible
+==230==
+==230== For lists of detected and suppressed errors, rerun with: -s
+==230== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

@@ -1,0 +1,31 @@
+ERRO
+
+==1516== Memcheck, a memory error detector==1516== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.==1516== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info        ==1516== Command: ./c==1516====1516== Invalid write of size 1==1516==    at 0x1091BC: main (c7correto.c:10)==1516==  Address 0x4a8b05a is 0 bytes after a block of size 26 alloc'd==1516==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)==1516==    by 0x109183: main (c7correto.c:5)==1516==
+==1516==
+==1516== HEAP SUMMARY:
+==1516==     in use at exit: 0 bytes in 0 blocks
+==1516==   total heap usage: 1 allocs, 1 frees, 26 bytes allocated==1516==
+==1516== All heap blocks were freed -- no leaks are possible
+==1516====1516== For lists of detected and suppressed errors, rerun with: -s
+==1516== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+
+
+ANÁLISE
+
+O código tentava acessar um espaço de memória não existente na posição
+26, então ele precisava ser devidamente alocado no 'calloc'
+
+==1548== Memcheck, a memory error detector
+==1548== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1548== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info        
+==1548== Command: ./c
+==1548==
+==1548== 
+==1548== HEAP SUMMARY:
+==1548==     in use at exit: 0 bytes in 0 blocks
+==1548==   total heap usage: 1 allocs, 1 frees, 27 bytes allocated
+==1548==
+==1548== All heap blocks were freed -- no leaks are possible
+==1548==
+==1548== For lists of detected and suppressed errors, rerun with: -s
+==1548== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

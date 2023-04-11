@@ -1,0 +1,78 @@
+ERRO
+
+==236== Memcheck, a memory error detector
+==236== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==236== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==236== Command: ./c
+==236==
+enter a number:
+4
+==236== Invalid write of size 1
+==236==    at 0x48EF757: _IO_str_overflow (strops.c:133)
+==236==    by 0x48EDEB3: _IO_default_xsputn (genops.c:399)
+==236==    by 0x48EDEB3: _IO_default_xsputn (genops.c:370)
+==236==    by 0x48D51CC: outstring_func (vfprintf-internal.c:239)
+==236==    by 0x48D51CC: __vfprintf_internal (vfprintf-internal.c:1263)
+==236==    by 0x48E1A08: __vsprintf_internal (iovsprintf.c:95)
+==236==    by 0x48C09A7: sprintf (sprintf.c:30)
+==236==    by 0x1092A5: printSum (c19correto.c:22)
+==236==    by 0x1092DD: main (c19correto.c:28)
+==236==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==236==
+==236==
+==236== Process terminating with default action of signal 11 (SIGSEGV)
+==236==  Access not within mapped region at address 0x0
+==236==    at 0x48EF757: _IO_str_overflow (strops.c:133)
+==236==    by 0x48EDEB3: _IO_default_xsputn (genops.c:399)
+==236==    by 0x48EDEB3: _IO_default_xsputn (genops.c:370)
+==236==    by 0x48D51CC: outstring_func (vfprintf-internal.c:239)
+==236==    by 0x48D51CC: __vfprintf_internal (vfprintf-internal.c:1263)
+==236==    by 0x48E1A08: __vsprintf_internal (iovsprintf.c:95)
+==236==    by 0x48C09A7: sprintf (sprintf.c:30)
+==236==    by 0x1092A5: printSum (c19correto.c:22)
+==236==    by 0x1092DD: main (c19correto.c:28)
+==236==  If you believe this happened as a result of a stack
+==236==  overflow in your program's main thread (unlikely but
+==236==  possible), you can try to increase the size of the
+==236==  main thread stack using the --main-stacksize= flag.
+==236==  The main thread stack size used in this run was 8388608.
+==236==
+==236== HEAP SUMMARY:
+==236==     in use at exit: 2,048 bytes in 2 blocks
+==236==   total heap usage: 2 allocs, 0 frees, 2,048 bytes allocated
+==236==
+==236== LEAK SUMMARY:
+==236==    definitely lost: 0 bytes in 0 blocks
+==236==    indirectly lost: 0 bytes in 0 blocks
+==236==      possibly lost: 0 bytes in 0 blocks
+==236==    still reachable: 2,048 bytes in 2 blocks
+==236==         suppressed: 0 bytes in 0 blocks
+==236== Reachable blocks (those to which a pointer was found) are not shown.
+==236== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==236==
+==236== For lists of detected and suppressed errors, rerun with: -s
+==236== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+Segmentation fault
+
+
+ANÁLISE
+
+Alocação correta do buffer
+
+==242== Memcheck, a memory error detector
+==242== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==242== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==242== Command: ./c
+==242==
+enter a number:
+4
+sum=10
+==242== 
+==242== HEAP SUMMARY:
+==242==     in use at exit: 0 bytes in 0 blocks
+==242==   total heap usage: 3 allocs, 3 frees, 2,058 bytes allocated
+==242==
+==242== All heap blocks were freed -- no leaks are possible
+==242==
+==242== For lists of detected and suppressed errors, rerun with: -s
+==242== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

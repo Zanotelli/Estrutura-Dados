@@ -1,0 +1,57 @@
+ERRO
+
+==1453== Memcheck, a memory error detector
+==1453== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1453== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info      
+==1453== Command: ./c
+==1453==
+==1453== Invalid free() / delete / delete[] / realloc()
+==1453==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1453==    by 0x109215: main (c6.c:21)
+==1453==  Address 0x4a8b090 is 0 bytes inside a block of size 40 free'd
+==1453==    at 0x484DCD3: realloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1453==    by 0x1091B4: resizeArray (c6.c:12)
+==1453==    by 0x109202: main (c6.c:19)
+==1453==  Block was alloc'd at
+==1453==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1453==    by 0x1091EC: main (c6.c:18)
+==1453==
+==1453== 
+==1453== HEAP SUMMARY:
+==1453==     in use at exit: 60 bytes in 1 blocks
+==1453==   total heap usage: 3 allocs, 3 frees, 116 bytes allocated
+==1453==
+==1453== 60 bytes in 1 blocks are definitely lost in loss record 1 of 1
+==1453==    at 0x484DCD3: realloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1453==    by 0x1091B4: resizeArray (c6.c:12)
+==1453==    by 0x109202: main (c6.c:19)
+==1453==
+==1453== LEAK SUMMARY:
+==1453==    definitely lost: 60 bytes in 1 blocks
+==1453==    indirectly lost: 0 bytes in 0 blocks
+==1453==      possibly lost: 0 bytes in 0 blocks
+==1453==    still reachable: 0 bytes in 0 blocks
+==1453==         suppressed: 0 bytes in 0 blocks
+==1453==
+==1453== For lists of detected and suppressed errors, rerun with: -s
+==1453== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
+
+ANÁLISE
+
+A função resize array não realocava a memória do arrya. Para convertar, 
+eu mudei o código de forma a realocar devidamente a memória
+
+==1465== Memcheck, a memory error detector
+==1465== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1465== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==1465== Command: ./c
+==1465== 
+==1465== 
+==1465== HEAP SUMMARY:
+==1465==     in use at exit: 0 bytes in 0 blocks
+==1465==   total heap usage: 3 allocs, 3 frees, 116 bytes allocated
+==1465==
+==1465== All heap blocks were freed -- no leaks are possible
+==1465==
+==1465== For lists of detected and suppressed errors, rerun with: -s
+==1465== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

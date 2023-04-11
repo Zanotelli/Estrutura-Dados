@@ -1,0 +1,59 @@
+ERRO
+
+==1396== Memcheck, a memory error detector
+==1396== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1396== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==1396== Command: ./c
+==1396== 
+==1396== Use of uninitialised value of size 8
+==1396==    at 0x10917A: main (c4.c:13)
+==1396== 
+==1396== Invalid write of size 4
+==1396==    at 0x10917A: main (c4.c:13)
+==1396==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==1396== 
+==1396== 
+==1396== Process terminating with default action of signal 11 (SIGSEGV)
+==1396==  Access not within mapped region at address 0x0
+==1396==    at 0x10917A: main (c4.c:13)
+==1396==  If you believe this happened as a result of a stack
+==1396==  overflow in your program's main thread (unlikely but
+==1396==  possible), you can try to increase the size of the
+==1396==  main thread stack using the --main-stacksize= flag.
+==1396==  The main thread stack size used in this run was 8388608.
+==1396== 
+==1396== HEAP SUMMARY:
+==1396==     in use at exit: 0 bytes in 0 blocks
+==1396==   total heap usage: 0 allocs, 0 frees, 0 bytes allocated
+==1396== 
+==1396== All heap blocks were freed -- no leaks are possible
+==1396== 
+==1396== Use --track-origins=yes to see where uninitialised values come from
+==1396== For lists of detected and suppressed errors, rerun with: -s
+==1396== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
+Segmentation fault
+
+
+ANÁLISE
+
+Os problemas identificados foram a tentativa de inicializar uma variável
+sem que ela estivesse alocada, não desalocar espaços de memória alocados
+para o vetor 'rotation3D->data' e a tentativa de liberação de memória da 
+variável 'text' que não tinha memória alocada. Para resolver, eu aloquei
+o espaço de memória devido para a variável, desaloquei a memória do vetor
+e comentei a variável 'text' que não estava sendo utilizada.
+
+==1435== Memcheck, a memory error detector
+==1435== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1435== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info      
+==1435== Command: ./c
+==1435==
+==1435== 
+==1435== HEAP SUMMARY:
+==1435==     in use at exit: 0 bytes in 0 blocks
+==1435==   total heap usage: 6 allocs, 6 frees, 112 bytes allocated
+==1435==
+==1435== All heap blocks were freed -- no leaks are possible
+==1435==
+==1435== For lists of detected and suppressed errors, rerun with: -s
+==1435== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

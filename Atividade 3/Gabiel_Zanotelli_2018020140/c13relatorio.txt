@@ -1,0 +1,50 @@
+ERRO
+
+==122== Memcheck, a memory error detector
+==122== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==122== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==122== Command: ./c
+==122==
+==122== 
+==122== HEAP SUMMARY:
+==122==     in use at exit: 35 bytes in 2 blocks
+==122==   total heap usage: 3 allocs, 1 frees, 47 bytes allocated
+==122==
+==122== 16 bytes in 1 blocks are definitely lost in loss record 1 of 2
+==122==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==122==    by 0x1091A6: main (c13correto.c:11)
+==122==
+==122== 19 bytes in 1 blocks are definitely lost in loss record 2 of 2
+==122==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==122==    by 0x10917E: main (c13correto.c:8)
+==122==
+==122== LEAK SUMMARY:
+==122==    definitely lost: 35 bytes in 2 blocks
+==122==    indirectly lost: 0 bytes in 0 blocks
+==122==      possibly lost: 0 bytes in 0 blocks
+==122==    still reachable: 0 bytes in 0 blocks
+==122==         suppressed: 0 bytes in 0 blocks
+==122==
+==122== For lists of detected and suppressed errors, rerun with: -s
+==122== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
+
+ANÁLISE
+
+Com cada nova alocação de memória, o código perdia a referência da
+memória alocada anteriormente. Para corrigir, foi necessário adicionar
+um 'free' depois de cada um dos mallocs 
+
+==134== Memcheck, a memory error detector
+==134== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==134== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==134== Command: ./c
+==134==
+==134== 
+==134== HEAP SUMMARY:
+==134==     in use at exit: 0 bytes in 0 blocks
+==134==   total heap usage: 3 allocs, 3 frees, 47 bytes allocated
+==134==
+==134== All heap blocks were freed -- no leaks are possible
+==134==
+==134== For lists of detected and suppressed errors, rerun with: -s
+==134== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

@@ -1,0 +1,68 @@
+ERRO
+
+==140== Memcheck, a memory error detector
+==140== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==140== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==140== Command: ./c
+==140==
+Positive integer:3
+==140== Conditional jump or move depends on uninitialised value(s)
+==140==    at 0x48D6B56: __vfprintf_internal (vfprintf-internal.c:1516)
+==140==    by 0x48C081E: printf (printf.c:33)
+==140==    by 0x10920D: main (c14correto.c:12)
+==140==
+==140== Use of uninitialised value of size 8
+==140==    at 0x48BA33B: _itoa_word (_itoa.c:177)
+==140==    by 0x48D5B3D: __vfprintf_internal (vfprintf-internal.c:1516)
+==140==    by 0x48C081E: printf (printf.c:33)
+==140==    by 0x10920D: main (c14correto.c:12)
+==140==
+==140== Conditional jump or move depends on uninitialised value(s)
+==140==    at 0x48BA34C: _itoa_word (_itoa.c:177)
+==140==    by 0x48D5B3D: __vfprintf_internal (vfprintf-internal.c:1516)
+==140==    by 0x48C081E: printf (printf.c:33)
+==140==    by 0x10920D: main (c14correto.c:12)
+==140==
+==140== Conditional jump or move depends on uninitialised value(s)
+==140==    at 0x48D6643: __vfprintf_internal (vfprintf-internal.c:1516)
+==140==    by 0x48C081E: printf (printf.c:33)
+==140==    by 0x10920D: main (c14correto.c:12)
+==140==
+==140== Conditional jump or move depends on uninitialised value(s)
+==140==    at 0x48D5C85: __vfprintf_internal (vfprintf-internal.c:1516)
+==140==    by 0x48C081E: printf (printf.c:33)
+==140==    by 0x10920D: main (c14correto.c:12)
+==140==
+Factorial 3 = 0
+==140== 
+==140== HEAP SUMMARY:
+==140==     in use at exit: 0 bytes in 0 blocks
+==140==   total heap usage: 2 allocs, 2 frees, 2,048 bytes allocated
+==140==
+==140== All heap blocks were freed -- no leaks are possible
+==140==
+==140== Use --track-origins=yes to see where uninitialised values come from
+==140== For lists of detected and suppressed errors, rerun with: -s
+==140== ERROR SUMMARY: 5 errors from 5 contexts (suppressed: 0 from 0)
+
+ANÁLISE
+
+Não se pode atribuir um valor para a variável 'fact' antes dela ser 
+devidamente inicializada
+
+==212== Memcheck, a memory error detector
+==212== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==212== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==212== Command: ./c
+==212==
+Positive integer:4
+Factorial 4 = 0
+==212== 
+==212== HEAP SUMMARY:
+==212==     in use at exit: 0 bytes in 0 blocks
+==212==   total heap usage: 2 allocs, 2 frees, 2,048 bytes allocated
+==212==
+==212== All heap blocks were freed -- no leaks are possible
+==212==
+==212== For lists of detected and suppressed errors, rerun with: -s
+==212== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

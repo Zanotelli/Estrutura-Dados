@@ -1,0 +1,68 @@
+ERRO
+
+==65==
+==65== Process terminating with default action of signal 2 (SIGINT)
+==65==    at 0x4974A37: write (write.c:26)
+==65==    by 0x48EAF6C: _IO_file_write@@GLIBC_2.2.5 (fileops.c:1180)
+==65==    by 0x48ECA60: new_do_write (fileops.c:448)
+==65==    by 0x48ECA60: _IO_new_do_write (fileops.c:425)
+==65==    by 0x48ECA60: _IO_do_write@@GLIBC_2.2.5 (fileops.c:422)
+==65==    by 0x48EB754: _IO_new_file_xsputn (fileops.c:1243)
+==65==    by 0x48EB754: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1196)
+==65==    by 0x48D6049: outstring_func (vfprintf-internal.c:239)
+==65==    by 0x48D6049: __vfprintf_internal (vfprintf-internal.c:1593)
+==65==    by 0x48C081E: printf (printf.c:33)
+==65==    by 0x10919D: main (c10correto.c:10)
+==65==
+==65== HEAP SUMMARY:
+==65==     in use at exit: 13,101,440 bytes in 102,348 blocks
+==65==   total heap usage: 102,348 allocs, 0 frees, 13,101,440 bytes allocated      
+==65==
+==65== 13,100,288 bytes in 102,346 blocks are definitely lost in loss record 3 of 3 
+==65==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==65==    by 0x10917E: main (c10correto.c:9)
+==65==
+==65== LEAK SUMMARY:
+==65==    definitely lost: 13,100,288 bytes in 102,346 blocks
+==65==    indirectly lost: 0 bytes in 0 blocks
+==65==      possibly lost: 0 bytes in 0 blocks
+==65==    still reachable: 1,152 bytes in 2 blocks
+==65==         suppressed: 0 bytes in 0 blocks
+==65== Reachable blocks (those to which a pointer was found) are not shown.
+==65== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==65==
+==65== For lists of detected and suppressed errors, rerun with: -s
+==65== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+
+
+ANÁLISE
+
+A memória é alocada infinitamente em um loop que não possui uma condição
+de parada. Para resolver se adicionou uma condição de parada para o 'while'
+e se adicionou um comando 'free' para desalocar a memória alocada antes que
+ela saia do contexto da função
+
+==75== Memcheck, a memory error detector
+==75== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==75== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==75== Command: ./c
+==75==
+78164032
+78165312
+78165504
+78165696
+78165888
+78166080
+78166272
+78166464
+78166656
+78166848
+==75== 
+==75== HEAP SUMMARY:
+==75==     in use at exit: 0 bytes in 0 blocks
+==75==   total heap usage: 11 allocs, 11 frees, 2,304 bytes allocated
+==75==
+==75== All heap blocks were freed -- no leaks are possible
+==75==
+==75== For lists of detected and suppressed errors, rerun with: -s
+==75== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

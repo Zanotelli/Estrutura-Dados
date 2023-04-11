@@ -1,0 +1,41 @@
+ERRO
+
+==105== Memcheck, a memory error detector
+==105== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==105== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==105== Command: ./c
+==105==
+==105== Conditional jump or move depends on uninitialised value(s)
+==105==    at 0x109159: main (c12correto.c:6)
+==105==
+X is zero==105== 
+==105== HEAP SUMMARY:
+==105==     in use at exit: 0 bytes in 0 blocks
+==105==   total heap usage: 1 allocs, 1 frees, 1,024 bytes allocated
+==105==
+==105== All heap blocks were freed -- no leaks are possible
+==105==
+==105== Use --track-origins=yes to see where uninitialised values come from
+==105== For lists of detected and suppressed errors, rerun with: -s
+==105== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+
+
+ANÁLISE
+
+O código tentava acessar o valor da variável 'x' antes dela ser inicializada.
+
+
+==116== Memcheck, a memory error detector
+==116== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==116== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==116== Command: ./c
+==116==
+X is zero==116== 
+==116== HEAP SUMMARY:
+==116==     in use at exit: 0 bytes in 0 blocks
+==116==   total heap usage: 1 allocs, 1 frees, 1,024 bytes allocated
+==116==
+==116== All heap blocks were freed -- no leaks are possible
+==116==
+==116== For lists of detected and suppressed errors, rerun with: -s
+==116== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
