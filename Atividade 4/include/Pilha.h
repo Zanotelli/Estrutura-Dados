@@ -1,16 +1,12 @@
-#include "TipoItem.h"
-#include "FilaBase.h"
+#include "Fila.h"
 
-class Pilha : public Fila {
+
+class Pilha {
 	public:
 		Pilha();
 		~Pilha();
-		void Empilha(TipoItem item);
-		TipoItem Desempilha();
-		void Imprime();
+		void Empilha(int item);
+		int Desempilha();
 	private:
-		int frente;
-		int tras;
-		static const int MAXTAM = 10;
-		TipoItem itens[MAXTAM];	
+		Fila fila;	
 };
