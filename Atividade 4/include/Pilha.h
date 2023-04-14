@@ -9,4 +9,5 @@ class Pilha {
 		int Desempilha();
 	private:
 		Fila fila;	
+        int tamanho;
 };

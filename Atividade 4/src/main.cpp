@@ -1,5 +1,4 @@
 #include "Pilha.h"
-#include <iostream>
 
 using namespace std;
 
@@ -8,7 +7,7 @@ int main(){
     Pilha pilha = Pilha();
 
 
-    cout << "Hello";
+    //cout << "Hello";
 
     pilha.Empilha(0);
     pilha.Empilha(1);
@@ -17,7 +16,7 @@ int main(){
 
     int aux = pilha.Desempilha();
 
-    cout << aux;
+    //cout << aux;
 
     return 0;
 }
