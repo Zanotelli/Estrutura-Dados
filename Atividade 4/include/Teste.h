@@ -1,3 +1,6 @@
+#ifndef TESTE_H
+#define TESTE_H
+
 class Teste
 {
     public:
@@ -12,3 +15,5 @@ class Teste
         int count_falhas;
         void AumentaCount();
 };
+
+#endif

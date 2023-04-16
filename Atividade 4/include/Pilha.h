@@ -1,3 +1,6 @@
+#ifndef PILHA_H
+#define PILHA_H
+
 #include "./Fila.h"
 
 
@@ -13,3 +16,5 @@ class Pilha {
 		Fila fila;	
         int tamanho;
 };
+
+#endif

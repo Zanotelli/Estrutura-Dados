@@ -1,3 +1,6 @@
+#ifndef FILA_H
+#define FILA_H
+
 class Fila {
     public:
         Fila();
@@ -12,3 +15,5 @@ class Fila {
         static const int MAXTAM = 10;
         int itens[MAXTAM];
 };
+
+#endif
