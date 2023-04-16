@@ -64,3 +64,21 @@ void Teste::TestaThrow(const char * texto, void (*func)(int), int num)
     count_sucessos++;
     
 }
+
+void Teste::TestePrint(const char* texto, bool result)
+{
+    printf("[Teste %d] %s : ", (count_teste + 1), texto);
+
+    if(result == true)
+    {
+        printf("SUCESSO\n");
+        count_sucessos++;
+    }
+    else{
+        printf("FALHA\n");
+        count_falhas++;
+    }
+
+    this->AumentaCount();
+
+}

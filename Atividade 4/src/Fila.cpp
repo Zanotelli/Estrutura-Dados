@@ -1,4 +1,5 @@
 #include "../include/Fila.h"
+#include <stdexcept>
 
 Fila::Fila(){
 	frente = 0;
@@ -15,7 +16,7 @@ Fila::~Fila(){
 
 void Fila::Enfileira(int item){
     if (tamanho == MAXTAM)
-		throw "Pilha Cheia!";
+		throw std::runtime_error("Fila Cheia!");
 	itens[tras] = item;
 	tras = (tras + 1) % MAXTAM;
 	tamanho++;
@@ -24,7 +25,7 @@ void Fila::Enfileira(int item){
 int Fila::Desenfileira(){
     int aux;
 	if (tamanho == 0)
-		throw "Fila está vazia!";
+		throw std::runtime_error("Fila está vazia!");
 	aux = itens[frente];
 	frente = (frente + 1) % MAXTAM;
 	tamanho--;

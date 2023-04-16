@@ -1,4 +1,5 @@
 #include <cstdio>
+#include <stdexcept>
 #include "../include/Pilha.h"
 #include "../include/Teste.h"
 
@@ -9,6 +10,14 @@ int main()
     Teste testador = Teste();
 
     testador.TestaInt("A pilha tem de estar vazia", pilha.Vazia(), 1);
+
+    try{
+        pilha.Desempilha();
+        testador.TestePrint("Podemos desempilhar uma pilha vazia", false);
+    }
+    catch(std::exception & err){
+        testador.TestePrint("NÃO podemos desempilhar uma pilha vazia", true);
+    }
     
     pilha.Empilha(0);
 
@@ -17,7 +26,6 @@ int main()
     pilha.Empilha(1);
     pilha.Empilha(2);
     pilha.Empilha(3);
-
 
     testador.TestaInt("Tamanho de '4'", pilha.GetTamanho(), 4);
     
@@ -35,6 +43,7 @@ int main()
     testador.TestaInt("Desempilha '9'", desempilhado, 9);
 
     pilha.Desempilha();
+    
     pilha.Empilha(3);
     pilha.Empilha(4);
     pilha.Empilha(5);
@@ -46,8 +55,13 @@ int main()
     testador.TestaInt("Tamanho de '10'", pilha.GetTamanho(), 10);
 
 
-    testador.TestaThrow("Tamanho de '10'", &pilha.Empilha, 10);
-    pilha.Empilha(10);
+    try{
+        pilha.Empilha(10);
+        testador.TestePrint("Podemos empilhar mais que '10'", false);
+    }
+    catch(std::exception & err){
+        testador.TestePrint("Não podemos empilhar mais que '10'", true);
+    }
 
     return 0;
 }
