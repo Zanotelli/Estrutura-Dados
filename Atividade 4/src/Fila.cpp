@@ -1,4 +1,4 @@
-#include "Fila.h"
+#include "../include/Fila.h"
 
 Fila::Fila(){
 	frente = 0;
@@ -6,11 +6,12 @@ Fila::Fila(){
     tamanho = 0;
 }
 
-void Fila::Limpa(){
+Fila::~Fila(){
 	frente = 0;
 	tras = 0;
     tamanho = 0;
 }
+
 
 void Fila::Enfileira(int item){
     if (tamanho == MAXTAM)

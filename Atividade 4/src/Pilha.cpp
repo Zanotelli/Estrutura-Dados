@@ -1,10 +1,16 @@
-#include "Pilha.h"
+#include "../include/Pilha.h"
 
 Pilha::Pilha(){
 	fila = Fila();
 }
 
 Pilha::~Pilha(){
+	tamanho = 0;
+}
+
+bool Pilha::Vazia(){
+	if(tamanho == 0) return true;
+	return false;
 }
 
 int Pilha::Desempilha() {
@@ -21,6 +27,8 @@ int Pilha::Desempilha() {
 	aux = fila.Desenfileira(); 
 
 	fila = filaAux;
+	
+	tamanho--;
 
 	return aux;
 }
@@ -28,4 +36,8 @@ int Pilha::Desempilha() {
 void Pilha::Empilha(int item) {
 	fila.Enfileira(item);
 	tamanho++;
+}
+
+int Pilha::GetTamanho(){
+	return tamanho;
 }
