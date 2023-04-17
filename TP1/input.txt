@@ -1,4 +1,4 @@
-LER (5+4)*3-2
+LER ( 5 + 4 ) x 3 - 2
 POSFIXA
 INFIXA
 ROSOLVER
