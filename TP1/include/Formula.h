@@ -15,8 +15,10 @@ class Formula
     private:
         const char * inFix;
         const char * postFix;
-        bool isPostFix();
-        bool isInFix();
+        bool isPostFix(const char *);
+        bool isInFix(const char *);
+        const char * convert2PostFix(const char *);
+        const char * convert2InFix(const char *);
         Pilha stack;
         Fila queue;
 };

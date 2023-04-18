@@ -10,8 +10,8 @@ void Solver::SetCommand(const char * data)
         throw std::runtime_error("Command is too big\n"); 
 
     char command[10];
-    int i = 0;
 
+    int i = 0;
     for(; i < 10; i++)
     {
         if(data[i] != ' ' && data[i] != '\n' && data[i] != '\r')
@@ -29,15 +29,15 @@ void Solver::SetCommand(const char * data)
     if(command[0] == 'L') {
         char formula[MAX_LENGTH];
 
-        for(int j = 0; j < MAX_LENGTH; j++) {
+        int j = 0;
+        for(; j < MAX_LENGTH; j++) {
             if (data[i+j] == '\n' || data[i+j] == '\r') 
                 break;
-            if(data[i+j] != ' ') 
+            if(data[i+j] != ' ') {
                 formula[j] = data[i+j];
+            }
         }
 
-        //Formula f = Formula(formula);
-
-        printf("Formula: %c\n", formula[0]);
+        Formula f = Formula(formula);
     }
 }
