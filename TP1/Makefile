@@ -4,8 +4,8 @@ SRC = src
 OBJ = obj
 INC = include
 BIN = bin
-OBJS = $(OBJ)/FileReader.o $(OBJ)/Solver.o $(OBJ)/Pilha.o $(OBJ)/Fila.o $(OBJ)/main.o
-HDRS = $(INC)/FileReader.h $(INC)/Solver.h $(INC)/Pilha.h $(INC)/Fila.h
+OBJS = $(OBJ)/FileReader.o $(OBJ)/Solver.o $(OBJ)/Formula.o $(OBJ)/Stack.o $(OBJ)/Queue.o $(OBJ)/main.o
+HDRS = $(INC)/FileReader.h $(INC)/Solver.h $(INC)/Formula.h $(INC)/Stack.h $(INC)/Queue.h
 CFLAGS = -Wall -c -I$(INC)
 
 EXE = $(BIN)/main
@@ -25,11 +25,14 @@ $(OBJ)/FileReader.o: $(HDRS) $(SRC)/FileReader.cpp
 $(OBJ)/Solver.o: $(HDRS) $(SRC)/Solver.cpp
 	$(CC) $(CFLAGS) -o $(OBJ)/Solver.o $(SRC)/Solver.cpp 
 	
-$(OBJ)/Pilha.o: $(HDRS) $(SRC)/Pilha.cpp
-	$(CC) $(CFLAGS) -o $(OBJ)/Pilha.o $(SRC)/Pilha.cpp 
+$(OBJ)/Stack.o: $(HDRS) $(SRC)/Stack.cpp
+	$(CC) $(CFLAGS) -o $(OBJ)/Stack.o $(SRC)/Stack.cpp 
 
-$(OBJ)/Fila.o: $(HDRS) $(SRC)/Fila.cpp
-	$(CC) $(CFLAGS) -o $(OBJ)/Fila.o $(SRC)/Fila.cpp 
+$(OBJ)/Queue.o: $(HDRS) $(SRC)/Queue.cpp
+	$(CC) $(CFLAGS) -o $(OBJ)/Queue.o $(SRC)/Queue.cpp 
+
+$(OBJ)/Formula.o: $(HDRS) $(SRC)/Formula.cpp
+	$(CC) $(CFLAGS) -o $(OBJ)/Formula.o $(SRC)/Formula.cpp 
 	
 clean:
 	rm -f $(EXE) $(OBJS) gmon.out

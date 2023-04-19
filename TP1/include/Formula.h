@@ -1,26 +1,27 @@
 #ifndef FORMULA_H
 #define FORMULA_H
 
+#include <ctype.h>
 #include <string.h>
+#include <iostream>
+#include <stdlib.h>     /* atoi */
+#include <stdexcept>
 
-#include "Fila.h"
-#include "Pilha.h"
+#include "Queue.h"
+#include "Stack.h"
 
 class Formula
 {
     public:
-        Formula(const char *);
-        const char * GetPost();
-        const char * GetIn();
+        Formula(char *);
     private:
-        const char * inFix;
-        const char * postFix;
+        Queue<char *> inFix;
+        Queue<char *> postFix;
+        Queue<char *> formQueue;
         bool isPostFix(const char *);
         bool isInFix(const char *);
-        const char * convert2PostFix(const char *);
-        const char * convert2InFix(const char *);
-        Pilha stack;
-        Fila queue;
+        Queue<char *> buildPostFix();
+        Queue<char *> buildInFix();
 };
 
 #endif

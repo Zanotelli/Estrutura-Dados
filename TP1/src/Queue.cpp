@@ -1,19 +1,29 @@
-#include "../include/Fila.h"
+#include "../include/Queue.h"
 
-Fila::Fila(){
+template <class T>
+Queue<T>::Queue(){
 	frente = 0;
 	tras = 0;
     tamanho = 0;
 }
 
-Fila::~Fila(){
+template <class T>
+Queue<T>::~Queue(){
 	frente = 0;
 	tras = 0;
     tamanho = 0;
 }
 
+template <class T>
+T Queue<T>::look(){
+	if(tamanho > 0)
+		return itens[tamanho-1];
+	else
+		return NULL;
+}
 
-void Fila::Enfileira(int item){
+template <class T>
+void Queue<T>::add(T item){
     if (tamanho == MAXTAM)
 		throw std::runtime_error("Fila Cheia!");
 	itens[tras] = item;
@@ -21,8 +31,9 @@ void Fila::Enfileira(int item){
 	tamanho++;
 }
 
-int Fila::Desenfileira(){
-    int aux;
+template <class T>
+T Queue<T>::remove(){
+    T aux;
 	if (tamanho == 0)
 		throw std::runtime_error("Fila está vazia!");
 	aux = itens[frente];
@@ -30,3 +41,5 @@ int Fila::Desenfileira(){
 	tamanho--;
 	return aux;
 }
+
+template class Queue<char *>;

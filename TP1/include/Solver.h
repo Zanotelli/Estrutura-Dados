@@ -12,12 +12,15 @@ class Solver
 {
     public:
         Solver();
-        void SetCommand(const char *);
-        float Solve();
+        ~Solver();
+        void Execute(char *);
         void ClearMemory();
     private:
         Formula * formula;
-        char * SetFormula(Formula *);
+        void Read(char *, int);
+        void PostFix();
+        void InFix();
+        void Solve();
 
 };
 

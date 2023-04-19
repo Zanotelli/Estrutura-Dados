@@ -13,7 +13,7 @@ class FileReader{
     public:
         FileReader(const char *);
         int GetSize();
-        const char * GetCommand(int);
+        char * GetCommand(int);
     private:
         char data[MAX_DATA_LENGTH][MAX_COMMAND_LENGTH];
         int size = 0;

@@ -28,7 +28,7 @@ int FileReader::GetSize()
     return size;
 }
 
-const char * FileReader::GetCommand(int i)
+char * FileReader::GetCommand(int i)
 {
     if(i > size) 
 		  throw std::runtime_error("Command does not exist\n");

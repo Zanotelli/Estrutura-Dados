@@ -9,7 +9,7 @@ int main()
 
     for(int i = 0; i < reader.GetSize(); i++)
     {
-        solver.SetCommand(reader.GetCommand(i));
+        solver.Execute(reader.GetCommand(i));
     }
 
     return 0;
