@@ -7,21 +7,21 @@
 #include <stdlib.h>     /* atoi */
 #include <stdexcept>
 
-#include "Queue.h"
 #include "Stack.h"
+#include "BinaryTree.h"
+#include "Node.h"
 
 class Formula
 {
     public:
         Formula(char *);
+        ~Formula();
+        void Solve();
+        void buildFromInFix (char *);
+        void buildFromPosFix(char *);
     private:
-        Queue<char *> inFix;
-        Queue<char *> postFix;
-        Queue<char *> formQueue;
-        bool isPostFix(const char *);
-        bool isInFix(const char *);
-        Queue<char *> buildPostFix();
-        Queue<char *> buildInFix();
+        BinaryTree tree;
+        bool isValid();
 };
 
 #endif

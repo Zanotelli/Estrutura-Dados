@@ -1,8 +1,7 @@
 #ifndef STACK_H
 #define STACK_H
 
-#include "./Queue.h"
-
+#include "Node.h"
 
 template <class T>
 class Stack {
@@ -15,7 +14,8 @@ class Stack {
 		bool Vazia();
 		int GetTamanho();
 	private:
-		Queue<T> fila;	
+        static const int MAXTAM = 200;
+        T itens[MAXTAM];	
         int tamanho;
 };
 

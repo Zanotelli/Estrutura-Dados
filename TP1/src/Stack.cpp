@@ -2,7 +2,7 @@
 
 template <class T>
 Stack<T>::Stack(){
-	fila = Queue<T>();
+	tamanho = 0;
 }
 
 template <class T>
@@ -18,24 +18,14 @@ bool Stack<T>::Vazia(){
 
 template <class T>
 T Stack<T>::look() {
-	return fila.look();
+	return itens[tamanho - 1];
 }
 
 template <class T>
 T Stack<T>::remove() {
 
-	Queue<T> filaAux = Queue<T>();
-
-	T aux;
-
-	for(int i = 0; i < tamanho - 1; i++){
-		aux = fila.remove();
-		filaAux.add(aux);
-	}
-
-	aux = fila.remove(); 
-
-	fila = filaAux;
+	T aux = itens[tamanho-1];
+	itens[tamanho-1] = nullptr;
 	
 	tamanho--;
 
@@ -44,7 +34,7 @@ T Stack<T>::remove() {
 
 template <class T>
 void Stack<T>::add(T item) {
-	fila.add(item);
+	itens[tamanho] = item;
 	tamanho++;
 }
 
@@ -53,4 +43,5 @@ int Stack<T>::GetTamanho(){
 	return tamanho;
 }
 
-template class Stack<char *>;
+template class Stack<Node<char*>*>;
+template class Stack<char*>;

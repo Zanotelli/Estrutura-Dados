@@ -18,20 +18,17 @@ void Solver::Execute(char * data) {
     int i = 0;
     for(; i < 10; i++)
     {
-        if(data[i] != ' ' && data[i] != '\n' && data[i] != '\r')
-        {
+        if(data[i] != ' ' && data[i] != '\n' && data[i] != '\r'){
             command[i] = data[i];
-        }
-        else
-        {
+        } else {
             break;
         }
     }
 
 
     if(command[0] == 'L') {
-    printf("Comand: %s\n", command);
-        Read(data, i);
+        printf("Comand: %s\n", command);
+        Read(data, (i + 1));
     } else if (command[0] == 'P')
     {
         /* code */
@@ -40,11 +37,22 @@ void Solver::Execute(char * data) {
         /* code */
     } else if (command[0] == 'R')
     {
-        /* code */
+        printf("Comand: %s\n", command);
+        Solve();
     } else {
         printf("ERROR: Invalid command '%s'.\n", command);
     }
     
+}
+
+void Solver::Solve() {
+
+    if(formula == NULL){
+        printf("ERROR: No formula on Solver memory!\n");
+        return;
+    }
+
+    formula->Solve();
 }
 
 
@@ -52,14 +60,20 @@ void Solver::Read(char * data, int i){
 
     char form[MAX_LENGTH];
 
-    int j = 0;
-    for(; j < MAX_LENGTH; j++) {
+    for(int j = 0; j < MAX_LENGTH; j++) {
+
         if (data[i+j] == '\n' || data[i+j] == '\r') 
             break;
-        if(data[i+j] != ' ') {
-            form[j] = data[i+j];
-        }
+
+        form[j] = data[i+j];
+        
     }
 
-    formula = new Formula(form);
+    Formula * formulaAux = new Formula(form);
+
+    if(formulaAux != nullptr)
+        formula = formulaAux;
+    else
+        printf("INVALID FORMULA: '%s'\n", form);
+
 }

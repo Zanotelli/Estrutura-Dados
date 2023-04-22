@@ -1,4 +1,10 @@
-LER ( 5 + 4 ) x 3 - 2
-POSFIXA
-INFIXA
 ROSOLVER
+LER 10 6 2 / + 5 2 - x
+ROSOLVER
+LER ( ( 10 + ( 6 / 2 ) ) x ( 5 - 2) )
+POSFIXA
+ROSOLVER
+LER ( ( 5,0 + 20,0 ) x ( 28,0 / 8 ) )
+POSFIXA
+ROSOLVER
+
