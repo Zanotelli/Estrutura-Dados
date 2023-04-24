@@ -11,7 +11,7 @@ Stack<T>::~Stack(){
 }
 
 template <class T>
-bool Stack<T>::Vazia(){
+bool Stack<T>::isEmpty(){
 	if(tamanho == 0) return true;
 	return false;
 }
@@ -25,7 +25,6 @@ template <class T>
 T Stack<T>::remove() {
 
 	T aux = itens[tamanho-1];
-	itens[tamanho-1] = nullptr;
 	
 	tamanho--;
 
@@ -43,5 +42,16 @@ int Stack<T>::GetTamanho(){
 	return tamanho;
 }
 
+/* template <class T>
+void Stack<T>::printStack(){
+	printf("Stack: ");
+	for(int i = 0; i < tamanho; i++){
+		printf("%f ", itens[i]);
+	}
+	printf("\n");
+} */
+
+
 template class Stack<Node<char*>*>;
 template class Stack<char*>;
+template class Stack<double>;

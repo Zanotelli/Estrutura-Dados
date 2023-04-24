@@ -1,6 +1,9 @@
 #ifndef STACK_H
 #define STACK_H
 
+#include <type_traits>
+#include <iostream>
+
 #include "Node.h"
 
 template <class T>
@@ -11,8 +14,9 @@ class Stack {
 		void add(T item);
 		T remove();
 		T look();
-		bool Vazia();
+		bool isEmpty();
 		int GetTamanho();
+		void printStack();
 	private:
         static const int MAXTAM = 200;
         T itens[MAXTAM];	

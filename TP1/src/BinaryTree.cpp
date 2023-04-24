@@ -5,33 +5,22 @@ BinaryTree::BinaryTree(){
 }
 
 BinaryTree::~BinaryTree(){
-    clear();
+    deleteRecursive(head);
 }
 
 Node<char *> * BinaryTree::getHead(){
     return head;
 }
 
-void BinaryTree::clear(){
-    deleteRecursive(head);
-}
 
-char * BinaryTree::unmount(Node<char *> * node) {
-
+void BinaryTree::unmount(Node<char *> * node, Queue<char *> * queue){
     if(node != nullptr) {
-        if(node->getLeft() != nullptr)
-            return unmount(node->getLeft());
-        if(node->getRigth() != nullptr)
-            return unmount(node->getRigth());
-        
-        char * aux = node->getData();
-        printf("return: %s \n", node->getData());
-        node = nullptr;
-        return aux;
+        unmount(node->getLeft(), queue);
+        unmount(node->getRigth(), queue);
+        queue->add(node->getData());
+        delete node;
     }
-    return NULL;
 }
-
 
 // INSERTS
 
@@ -51,7 +40,7 @@ void BinaryTree::insertRecursive(Node<char *> * node){
 }
 
 void BinaryTree::deleteRecursive(Node<char *> * node){
-    if(node != NULL) {
+    if(node != nullptr) {
         deleteRecursive(node->getLeft());
         deleteRecursive(node->getRigth());
         delete node;

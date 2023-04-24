@@ -4,6 +4,8 @@
 #include <cstdio>
 
 #include "Node.h"
+#include "Stack.h"
+#include "Queue.h"
 
 class BinaryTree {
     public:
@@ -11,8 +13,7 @@ class BinaryTree {
         ~BinaryTree();
         Node<char *> * getHead();
         void insert(Node<char *> *);
-        void clear();
-        char * unmount(Node<char *> * node);
+        void unmount(Node<char *> * node, Queue<char *> * stack);
     private:
         Node<char *> * head;
         void insertRecursive(Node<char *> *);

@@ -13,6 +13,8 @@ Node<T>::Node(T item){
 
 template <class T>
 Node<T>::~Node(){
+    delete left;
+    delete rigth;
 }
 
 template <class T>

@@ -13,8 +13,8 @@ void Solver::Execute(char * data) {
     if(strlen(data) > MAX_LENGTH)
         throw std::runtime_error("Command is too big\n"); 
 
-    char command[10];
-
+    char command[10] = " ";
+    
     int i = 0;
     for(; i < 10; i++)
     {
@@ -29,14 +29,11 @@ void Solver::Execute(char * data) {
     if(command[0] == 'L') {
         printf("Comand: %s\n", command);
         Read(data, (i + 1));
-    } else if (command[0] == 'P')
-    {
+    } else if (command[0] == 'P') {
         /* code */
-    } else if (command[0] == 'I')
-    {
+    } else if (command[0] == 'I') {
         /* code */
-    } else if (command[0] == 'R')
-    {
+    } else if (command[0] == 'R') {
         printf("Comand: %s\n", command);
         Solve();
     } else {

@@ -1,10 +1,9 @@
-ROSOLVER
-LER 10 6 2 / + 5 2 - x
-ROSOLVER
-LER ( ( 10 + ( 6 / 2 ) ) x ( 5 - 2) )
+RESOLVER
+LER 10 8 2 / + 7 2 - x
+RESOLVER
+LER ( ( 10 + ( 6 / 2 ) ) x ( 7 - 2) )
 POSFIXA
-ROSOLVER
+RESOLVER
 LER ( ( 5,0 + 20,0 ) x ( 28,0 / 8 ) )
 POSFIXA
-ROSOLVER
-
+RESOLVER

@@ -4,10 +4,11 @@
 #include <ctype.h>
 #include <string.h>
 #include <iostream>
-#include <stdlib.h>     /* atoi */
+#include <stdlib.h>
 #include <stdexcept>
 
 #include "Stack.h"
+#include "Queue.h"
 #include "BinaryTree.h"
 #include "Node.h"
 
@@ -22,6 +23,7 @@ class Formula
     private:
         BinaryTree tree;
         bool isValid();
+        double solveQueue(Queue<char*>*);
 };
 
 #endif

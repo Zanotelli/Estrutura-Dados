@@ -12,8 +12,8 @@ bool is_number(char * s) {
 // CONSTRUCTOR
 
 Formula::~Formula(){
-    tree.clear();
-    delete &tree;
+    /* tree.clear(); */
+    /* delete &tree; */
 }
 
 Formula::Formula(char * formula) {
@@ -33,19 +33,61 @@ Formula::Formula(char * formula) {
 void Formula::Solve(){
 
     BinaryTree auxTree = tree;
-    Stack stack = Stack<char *>();
+    Queue queue = Queue<char *>();
 
-    double solution = 0.0;
+    auxTree.unmount(auxTree.getHead(), &queue);
 
-    char * data = NULL;
-
-    do{
-        data = auxTree.unmount(auxTree.getHead());
-        stack.add(data);
-
-    } while (data != NULL);
+    double solution = solveQueue(&queue);
     
-    printf("SOLUTION: %d \n", solution);
+    printf("SOLUTION: %f \n", solution);
+}
+
+double Formula::solveQueue(Queue<char*> * queue){
+
+    double result = 0.0;
+    Stack stackAux = Stack<double>();
+
+    double a;
+    double b;
+
+    while (!queue->isEmpty()) {
+
+        char * item = queue->remove();
+
+        if(strcmp(item, "+") == 0){
+
+            b = stackAux.remove();
+            a = stackAux.remove();
+            result = a + b;
+            stackAux.add(result);
+
+        } else if (strcmp(item, "-") == 0) {
+
+            b = stackAux.remove();
+            a = stackAux.remove();
+            result = a - b;
+            stackAux.add(result);
+
+        } else if (strcmp(item, "x") == 0) {
+            
+            b = stackAux.remove();
+            a = stackAux.remove();
+            result = a * b;
+            stackAux.add(result);
+
+        } else if (strcmp(item, "/") == 0) {
+
+            b = stackAux.remove();
+            a = stackAux.remove();
+            result = a / b;
+            stackAux.add(result);
+
+        } else {
+            stackAux.add(atof(item));
+        }
+    }
+    
+    return result;
 }
 
 void Formula::buildFromPosFix(char * formula) {
@@ -77,7 +119,7 @@ void Formula::buildFromPosFix(char * formula) {
 
 
 void Formula::buildFromInFix(char * word) {
-/*
+    /*
     tree = BinaryTree();
     Stack stack = Stack<Node<char *>>();
 
