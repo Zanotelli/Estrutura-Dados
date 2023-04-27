@@ -14,6 +14,7 @@ class BinaryTree {
         Node<char *> * getHead();
         void insert(Node<char *> *);
         void unmount(Node<char *> * node, Queue<char *> * stack);
+        void clear();
     private:
         Node<char *> * head;
         void insertRecursive(Node<char *> *);

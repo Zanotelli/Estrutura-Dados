@@ -4,9 +4,8 @@
 template <class T>
 class Node {
     public:
-        Node();
         Node(T item);
-        ~Node();
+        /* ~Node(); */
         T getData();
         void setLeft(Node *);
         void setRigth(Node *);

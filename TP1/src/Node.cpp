@@ -1,21 +1,17 @@
 #include "../include/Node.h"
 
 template <class T>
-Node<T>::Node(){
-}
-
-template <class T>
 Node<T>::Node(T item){
     data = item;
     left = nullptr;
     rigth = nullptr;
 }
 
-template <class T>
+/* template <class T>
 Node<T>::~Node(){
     delete left;
     delete rigth;
-}
+} */
 
 template <class T>
 T Node<T>::getData(){

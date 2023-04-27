@@ -5,13 +5,16 @@ BinaryTree::BinaryTree(){
 }
 
 BinaryTree::~BinaryTree(){
-    deleteRecursive(head);
+    clear();
 }
 
 Node<char *> * BinaryTree::getHead(){
     return head;
 }
 
+void BinaryTree::clear(){
+    deleteRecursive(head);
+}
 
 void BinaryTree::unmount(Node<char *> * node, Queue<char *> * queue){
     if(node != nullptr) {
@@ -21,6 +24,7 @@ void BinaryTree::unmount(Node<char *> * node, Queue<char *> * queue){
         delete node;
     }
 }
+
 
 // INSERTS
 

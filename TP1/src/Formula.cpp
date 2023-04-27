@@ -12,8 +12,7 @@ bool is_number(char * s) {
 // CONSTRUCTOR
 
 Formula::~Formula(){
-    /* tree.clear(); */
-    /* delete &tree; */
+    tree.clear();
 }
 
 Formula::Formula(char * formula) {
@@ -27,68 +26,6 @@ Formula::Formula(char * formula) {
     }
 }
 
-
-// PRIVATE
-
-void Formula::Solve(){
-
-    BinaryTree auxTree = tree;
-    Queue queue = Queue<char *>();
-
-    auxTree.unmount(auxTree.getHead(), &queue);
-
-    double solution = solveQueue(&queue);
-    
-    printf("SOLUTION: %f \n", solution);
-}
-
-double Formula::solveQueue(Queue<char*> * queue){
-
-    double result = 0.0;
-    Stack stackAux = Stack<double>();
-
-    double a;
-    double b;
-
-    while (!queue->isEmpty()) {
-
-        char * item = queue->remove();
-
-        if(strcmp(item, "+") == 0){
-
-            b = stackAux.remove();
-            a = stackAux.remove();
-            result = a + b;
-            stackAux.add(result);
-
-        } else if (strcmp(item, "-") == 0) {
-
-            b = stackAux.remove();
-            a = stackAux.remove();
-            result = a - b;
-            stackAux.add(result);
-
-        } else if (strcmp(item, "x") == 0) {
-            
-            b = stackAux.remove();
-            a = stackAux.remove();
-            result = a * b;
-            stackAux.add(result);
-
-        } else if (strcmp(item, "/") == 0) {
-
-            b = stackAux.remove();
-            a = stackAux.remove();
-            result = a / b;
-            stackAux.add(result);
-
-        } else {
-            stackAux.add(atof(item));
-        }
-    }
-    
-    return result;
-}
 
 void Formula::buildFromPosFix(char * formula) {
 
@@ -117,9 +54,7 @@ void Formula::buildFromPosFix(char * formula) {
     tree.insert(stack.remove());
 }
 
-
-void Formula::buildFromInFix(char * word) {
-    /*
+void Formula::buildFromInFix(char * word) {    /*
     tree = BinaryTree();
     Stack stack = Stack<Node<char *>>();
 
@@ -130,3 +65,52 @@ void Formula::buildFromInFix(char * word) {
         word = strtok(NULL, " ");
     }*/
 }
+
+// PRIVATE
+
+void Formula::Solve(){
+
+    BinaryTree auxTree = tree;
+    Queue queue = Queue<char *>();
+
+    auxTree.unmount(auxTree.getHead(), &queue);
+
+    double solution = solveQueue(&queue);
+    
+    printf("VAL: %f \n", solution);
+}
+
+double Formula::solveQueue(Queue<char*> * queue){
+
+    double result = 0.0;
+    Stack stackAux = Stack<double>();
+
+    double a;
+    double b;
+
+    while (!queue->isEmpty()) {
+
+        char * item = queue->remove();
+
+        if (is_number(item)) {
+            stackAux.add(atof(item));
+        } else {
+            b = stackAux.remove();
+            a = stackAux.remove();
+            
+            if(strcmp(item, "+") == 0)
+                result = a + b;
+            else if (strcmp(item, "-") == 0) 
+                result = a - b;
+            else if (strcmp(item, "x") == 0)
+                result = a * b;
+            else if (strcmp(item, "/") == 0)
+                result = a / b;
+            
+            stackAux.add(result);
+        }
+    }
+    
+    return result;
+}
+
