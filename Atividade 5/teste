@@ -8,13 +8,23 @@
                7 (3)
                    8 (4)
                    9 (4)
-0 testando ancestral(2,8) - VERDADEIRO
-1 testando ancestral(9,5) - FALSO
-2 testando ancestral(5,0) - FALSO
-3 testando ancestral(7,0) - FALSO
-4 testando ancestral(8,5) - FALSO
-5 testando ancestral(9,5) - FALSO
+          10 (2)
+              11 (3)
+                  12 (4)
+                      13 (5)
+                      14 (5)
+0 testando ancestral(0,11) - VERDADEIRO
+1 testando ancestral(0,3) - VERDADEIRO
+2 testando ancestral(4,13) - FALSO
+3 testando ancestral(7,13) - FALSO
+4 testando ancestral(7,12) - FALSO
+5 testando ancestral(2,13) - VERDADEIRO
 6 testando ancestral(8,1) - FALSO
-7 testando ancestral(8,5) - FALSO
-8 testando ancestral(0,8) - VERDADEIRO
-9 testando ancestral(9,1) - FALSO
+7 testando ancestral(12,14) - VERDADEIRO
+8 testando ancestral(1,13) - FALSO
+9 testando ancestral(11,1) - FALSO
+10 testando ancestral(3,0) - FALSO
+11 testando ancestral(5,10) - FALSO
+12 testando ancestral(10,11) - VERDADEIRO
+13 testando ancestral(0,9) - VERDADEIRO
+14 testando ancestral(1,9) - FALSO

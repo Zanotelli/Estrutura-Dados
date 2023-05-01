@@ -123,25 +123,11 @@ int ancestral(TipoNo * root, prm_t * prm, int i, int j){
   bool ctl = verificaCtl(centrl,i,j,prm->treesize,root->Reg.Chave);
 
   
-  printf("%d | %d | %d\n", pre, pos, ctl);
-  printf("Pre-ordem (%d,%d): ", i, j);
-  for(int x = 0; x < prm->treesize; x++){
-    printf("%ld ", preOrd[x]);
-  }
-  printf("\n");
-
-    printf("Pos-ordem (%d,%d): ", i, j);
-  for(int x = 0; x < prm->treesize; x++){
-    printf("%ld ", posOrd[x]);
-  }
-  printf("\n");
-
-    printf("Central   (%d,%d): ", i, j);
-  for(int x = 0; x < prm->treesize; x++){
-    printf("%ld ", centrl[x]);
-  }
-  printf("\n\n");
-  
+  printf("(%d,%d)\n", i, j);
+  printf("Pre: %d |", pre);
+  printf(" Pos: %d |", pos);
+  printf(" In : %d\n\n", ctl);
+ 
 
   if(pre && pos && ctl){
     return 1;
