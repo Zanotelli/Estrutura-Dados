@@ -70,10 +70,9 @@ void Formula::buildFromInFix(char * word) {    /*
 
 void Formula::Solve(){
 
-    BinaryTree auxTree = tree;
     Queue queue = Queue<char *>();
 
-    auxTree.unmount(auxTree.getHead(), &queue);
+    tree.unmount(tree.getHead(), &queue);
 
     double solution = solveQueue(&queue);
     

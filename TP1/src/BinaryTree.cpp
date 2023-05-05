@@ -21,7 +21,6 @@ void BinaryTree::unmount(Node<char *> * node, Queue<char *> * queue){
         unmount(node->getLeft(), queue);
         unmount(node->getRigth(), queue);
         queue->add(node->getData());
-        delete node;
     }
 }
 
