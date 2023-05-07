@@ -1,10 +1,11 @@
 RESOLVER
-LER 10 9 2 / + 7 2 - x
+LER POSFIX 10 9 2 / + 7 2 - *
 RESOLVER
+POSFIX
 RESOLVER
-LER ( ( 10 + ( 6 / 2 ) ) x ( 7 - 2) )
+LER INFIX ( ( 10 + ( 6 / 2 ) ) * ( 7 - 2) )
 POSFIXA
 RESOLVER
-LER ( ( 5,0 + 20,0 ) x ( 28,0 / 8 ) )
+LER INFIX ( ( 5,0 + 20,0 ) * ( 28,0 / 8 ) )
 POSFIXA
 RESOLVER

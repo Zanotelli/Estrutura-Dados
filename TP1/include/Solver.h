@@ -17,10 +17,11 @@ class Solver
         void ClearMemory();
     private:
         Formula * formula;
-        void Read(char *, int);
+        void Read(char *, bool, int);
         void PostFix();
         void InFix();
         void Solve();
+        void PrintPosfix();
 
 };
 

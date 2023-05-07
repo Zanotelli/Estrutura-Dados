@@ -16,7 +16,7 @@ void Solver::Execute(char * data) {
     char command[10] = " ";
     
     int i = 0;
-    for(; i < 10; i++)
+    for(; i < MAX_LENGTH; i++)
     {
         if(data[i] != ' ' && data[i] != '\n' && data[i] != '\r'){
             command[i] = data[i];
@@ -27,17 +27,31 @@ void Solver::Execute(char * data) {
 
 
     if(command[0] == 'L') {
-        printf("Comand: %s\n", command);
-        Read(data, (i + 1));
+
+        i++;
+        bool isInfix = data[i] == 'I' ? true : false;
+
+        for(; i < MAX_LENGTH; i++) {
+            if(data[i] == ' ') break;
+        }
+        Read(data, isInfix, (i + 1));
+
     } else if (command[0] == 'P') {
-        /* code */
+
+        PrintPosfix();
+
     } else if (command[0] == 'I') {
+
         /* code */
+
     } else if (command[0] == 'R') {
-        printf("Comand: %s\n", command);
+
         Solve();
+
     } else {
+
         printf("ERROR: Invalid command '%s'.\n", command);
+
     }
     
 }
@@ -53,7 +67,7 @@ void Solver::Solve() {
 }
 
 
-void Solver::Read(char * data, int i){
+void Solver::Read(char * data, bool isInfix, int i){
 
     char form[MAX_LENGTH];
 
@@ -66,11 +80,21 @@ void Solver::Read(char * data, int i){
         
     }
 
-    Formula * formulaAux = new Formula(form);
+    Formula * formulaAux = new Formula(form, isInfix);
 
     if(formulaAux != nullptr)
         formula = formulaAux;
     else
         printf("INVALID FORMULA: '%s'\n", form);
 
+}
+
+void Solver::PrintPosfix(){
+
+     if(formula == NULL){
+        printf("ERROR: No formula on Solver memory!\n");
+        return;
+    }
+
+    formula->printPosFix();
 }

@@ -15,14 +15,18 @@ Formula::~Formula(){
     tree.clear();
 }
 
-Formula::Formula(char * formula) {
+Formula::Formula(char * formula, bool isInfix) {
 
-    if( formula[0] == '(' ){
+    if( isInfix ){
+
         printf("In fixa \n");
         buildFromInFix(formula);
+
     } else{
+
         printf("Pos fixa \n");
         buildFromPosFix(formula);
+
     }
 }
 
@@ -54,16 +58,15 @@ void Formula::buildFromPosFix(char * formula) {
     tree.insert(stack.remove());
 }
 
-void Formula::buildFromInFix(char * word) {    /*
+void Formula::buildFromInFix(char * word) {    
+
     tree = BinaryTree();
-    Stack stack = Stack<Node<char *>>();
+    Stack stack = Stack<Node<char *> *>();
+    
+    
 
-     while(word != NULL){
-        
-        
+    tree.insert(stack.remove());
 
-        word = strtok(NULL, " ");
-    }*/
 }
 
 // PRIVATE
@@ -76,7 +79,7 @@ void Formula::Solve(){
 
     double solution = solveQueue(&queue);
     
-    printf("VAL: %f \n", solution);
+    printf("# %f \n", solution);
 }
 
 double Formula::solveQueue(Queue<char*> * queue){
@@ -101,7 +104,7 @@ double Formula::solveQueue(Queue<char*> * queue){
                 result = a + b;
             else if (strcmp(item, "-") == 0) 
                 result = a - b;
-            else if (strcmp(item, "x") == 0)
+            else if (strcmp(item, "*") == 0)
                 result = a * b;
             else if (strcmp(item, "/") == 0)
                 result = a / b;
@@ -113,3 +116,10 @@ double Formula::solveQueue(Queue<char*> * queue){
     return result;
 }
 
+// Prints
+
+void Formula::printPosFix(){
+
+    tree.postOrderTrack(tree.getHead());
+    printf("\n");
+}

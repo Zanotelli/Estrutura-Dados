@@ -24,6 +24,13 @@ void BinaryTree::unmount(Node<char *> * node, Queue<char *> * queue){
     }
 }
 
+void BinaryTree::postOrderTrack(Node<char *> * node){
+    if(node != nullptr) {
+        postOrderTrack(node->getLeft());
+        postOrderTrack(node->getRigth());
+        printf("%s ", node->getData());
+    }
+}
 
 // INSERTS
 

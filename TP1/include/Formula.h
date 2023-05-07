@@ -15,11 +15,12 @@
 class Formula
 {
     public:
-        Formula(char *);
+        Formula(char *, bool);
         ~Formula();
         void Solve();
         void buildFromInFix (char *);
         void buildFromPosFix(char *);
+        void printPosFix();
     private:
         BinaryTree tree;
         bool isValid();

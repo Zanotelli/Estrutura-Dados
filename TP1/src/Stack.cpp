@@ -42,15 +42,6 @@ int Stack<T>::GetTamanho(){
 	return tamanho;
 }
 
-/* template <class T>
-void Stack<T>::printStack(){
-	printf("Stack: ");
-	for(int i = 0; i < tamanho; i++){
-		printf("%f ", itens[i]);
-	}
-	printf("\n");
-} */
-
 
 template class Stack<Node<char*>*>;
 template class Stack<char*>;

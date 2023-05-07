@@ -14,6 +14,7 @@ class BinaryTree {
         Node<char *> * getHead();
         void insert(Node<char *> *);
         void unmount(Node<char *> * node, Queue<char *> * stack);
+        void postOrderTrack(Node<char *> *);
         void clear();
     private:
         Node<char *> * head;
