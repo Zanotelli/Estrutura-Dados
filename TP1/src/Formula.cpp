@@ -5,7 +5,7 @@
 bool is_number(char * s) {
     char* end = nullptr;
     strtod(s, &end);
-    return (end != s) && (*end == '\0');
+    return (end != s) && (*end == '\0') && (strcmp(s, "(") || strcmp(s, ")"));
 }
 
 
@@ -17,55 +17,127 @@ Formula::~Formula(){
 
 Formula::Formula(char * formula, bool isInfix) {
 
-    if( isInfix ){
+    try{
+        if( isInfix ){
 
-        printf("In fixa \n");
-        buildFromInFix(formula);
+            printf("In fixa \n");
+            buildFromInFix(formula);
 
-    } else{
+        } else{
 
-        printf("Pos fixa \n");
-        buildFromPosFix(formula);
+            printf("Pos fixa \n");
+            buildFromPosFix(formula);
 
+        }
+    } catch(const std::exception & e){
+        printf("ERROR: Couldn't build binary tree. %s.", e.what());
     }
+
 }
 
 
 void Formula::buildFromPosFix(char * formula) {
 
-    tree = BinaryTree();
-    Stack stack = Stack<Node<char *> *>();
+    try{
+        tree = BinaryTree();
+        Stack stack = Stack<Node<char *> *>();
 
-    char * word = strtok(formula, " ");
+        char * word = strtok(formula, " ");
 
-     while(word != NULL){
-        
-        Node<char*> * node = new Node(word);
+        while(word != NULL){
+            
+            Node<char*> * node = new Node(word);
 
-        if(is_number(word)){
-            stack.add(node);
-        } else {
-            Node<char*> * r = stack.remove();
-            Node<char*> * l = stack.remove();
-            node->setRigth( r );
-            node->setLeft ( l );
-            stack.add(node);
+            if(is_number(word)){
+                stack.add(node);
+            } else {
+                Node<char*> * r = stack.remove();
+                Node<char*> * l = stack.remove();
+                node->setRigth( r );
+                node->setLeft ( l );
+                stack.add(node);
+            }
+
+            word = strtok(NULL, " ");
         }
 
-        word = strtok(NULL, " ");
-    }
+        tree.insert(stack.remove());
 
-    tree.insert(stack.remove());
+    }catch(const std::exception & e){
+
+        throw std::runtime_error("Invalid PostFix formula");
+
+	}
 }
 
-void Formula::buildFromInFix(char * word) {    
+void Formula::buildFromInFix(char * formula) {    
 
-    tree = BinaryTree();
-    Stack stack = Stack<Node<char *> *>();
-    
-    
+    try{
 
-    tree.insert(stack.remove());
+        tree = BinaryTree();
+        Stack stack = Stack<Node<char *> *>();
+        
+        char * word = strtok(formula, " ");
+
+        while(word != NULL){
+            
+            Node<char*> * node = new Node(word);
+
+            if(is_number(word)){
+
+                stack.add(node);
+
+            } else if (word[0] == '(') {
+
+                stack.add(node);
+                
+            } else if (word[0] == ')') {
+
+                while (!stack.isEmpty() && stack.look()->getData()[0] != '(') {
+
+                    Node<char*> * op = stack.remove();
+
+                    if(stack.look()->getData()[0] != '('){
+
+                        Node<char*> * right = stack.remove();
+                        Node<char*> * left = stack.remove();
+                        op->setLeft(left);
+                        op->setRigth(right);
+
+                    } else {
+                        stack.add(op);
+                        break;
+                    }
+
+                    stack.add(op);
+                }
+                delete node;
+
+                if (!stack.isEmpty() && stack.look()->getData()[0] == '(') {
+                    Node<char*> * aux = stack.remove();     // Remove '('
+                    delete aux;
+                }
+
+            } else {
+
+                Node<char*> * r = stack.remove();
+                Node<char*> * l = stack.remove();
+                node->setRigth( r );
+                node->setLeft ( l );
+                stack.add(node);
+
+            }
+
+            word = strtok(NULL, " ");
+        }
+
+        tree.insert(stack.remove());
+
+    }catch(const std::exception & e){
+
+        throw std::runtime_error("Invalid InFix formula");
+
+	}
 
 }
 

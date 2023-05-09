@@ -18,17 +18,27 @@ bool Stack<T>::isEmpty(){
 
 template <class T>
 T Stack<T>::look() {
-	return itens[tamanho - 1];
+	try{
+
+		return itens[tamanho - 1];
+
+	}catch(const std::exception & e){
+		throw std::runtime_error(e.what());
+	}
 }
 
 template <class T>
 T Stack<T>::remove() {
-
-	T aux = itens[tamanho-1];
 	
-	tamanho--;
+	try{
 
-	return aux;
+		T aux = itens[tamanho-1];
+		tamanho--;
+		return aux;
+
+	}catch(const std::exception & e){
+		throw std::runtime_error(e.what());
+	}
 }
 
 template <class T>

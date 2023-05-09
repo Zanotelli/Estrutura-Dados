@@ -1,42 +1,50 @@
+#include <filesystem>
+#include <vector>
+#include <iostream>
+
 #include "../include/FileReader.h"
 #include "../include/Formula.h"
 #include "../include/Solver.h"
 
-int main()
-{
-    FileReader reader = FileReader("input.txt");
+
+const char* getPath(const char* filename){
+
+    const char* basepath = "./inputs/";
+    char* result = new char[strlen(basepath) + strlen(filename) + 1];
+
+    strcpy(result, basepath);
+    strcat(result, filename);
+
+    return result;
+}
+
+
+int main() {
+
+    //const char * directory_path = "./inputs";
+
+    // Lê todos os arquivos na pasta de inputs
+    /* for (const auto& entry : std::filesystem::directory_iterator(directory_path)) {
+        if (entry.is_regular_file()) {
+            file_names.push_back(entry.path().filename().c_str());
+        }
+    } */
+
+
+    //for (const auto& file_name : file_names) {
+    //}
+
+
+    FileReader reader = FileReader("./entdouble.s2.n5.p.in");
     Solver solver = Solver();
 
     for(int i = 0; i < reader.GetSize(); i++)
     {
         solver.Execute(reader.GetCommand(i));
     }
+    printf("________________________\n");
+   
 
-   /*  char * str = "0";
-    Node<char*> * node0 = new Node(str);
-    str = "1";
-    Node<char*> * node1 = new Node(str);
-    str = "2";
-    Node<char*> * node2 = new Node(str);
-    str = "3";
-    Node<char*> * node3 = new Node(str);
-    str = "4";
-    Node<char*> * node4 = new Node(str);
-    str = "5";
-    Node<char*> * node5 = new Node(str);
-    str = "6";
-    Node<char*> * node6 = new Node(str);
-
-    node4->setLeft(node6);
-    node4->setRigth(node5);
-    node2->setLeft(node4);
-    node2->setRigth(node3);
-    node0->setLeft(node2);
-    node0->setRigth(node1);
-
-    BinaryTree tree = BinaryTree();
-
-    tree.insert(node0); */
 
     return 0;
 }

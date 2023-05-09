@@ -13,7 +13,7 @@ FileReader::FileReader(const char * filePath)
 
     while ( fgets(line, sizeof(line), file))
     {
-        printf("%s", line);
+        //printf("%s", line);
         strcpy(data[count], line);
         count++;
     }

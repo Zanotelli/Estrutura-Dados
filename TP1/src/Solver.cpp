@@ -25,6 +25,7 @@ void Solver::Execute(char * data) {
         }
     }
 
+    printf("%s:\n", command);
 
     if(command[0] == 'L') {
 
