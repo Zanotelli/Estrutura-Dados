@@ -23,7 +23,6 @@ class Formula
         void printPosFix();
     private:
         BinaryTree tree;
-        bool isValid();
         double solveQueue(Queue<char*>*);
 };
 

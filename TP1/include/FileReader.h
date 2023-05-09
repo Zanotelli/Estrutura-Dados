@@ -6,8 +6,8 @@
 #include <cstdio>
 #include <stdexcept>
 
-#define MAX_DATA_LENGTH 100
-#define MAX_COMMAND_LENGTH 100
+#define MAX_DATA_LENGTH 50
+#define MAX_COMMAND_LENGTH 2000
 
 class FileReader{
     public:

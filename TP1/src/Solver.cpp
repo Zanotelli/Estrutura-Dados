@@ -25,7 +25,7 @@ void Solver::Execute(char * data) {
         }
     }
 
-    printf("%s:\n", command);
+    printf("\n");
 
     if(command[0] == 'L') {
 
@@ -35,14 +35,17 @@ void Solver::Execute(char * data) {
         for(; i < MAX_LENGTH; i++) {
             if(data[i] == ' ') break;
         }
+        printf("%s\n", data);
         Read(data, isInfix, (i + 1));
 
     } else if (command[0] == 'P') {
 
+        printf("POSFIXA: ");
         PrintPosfix();
 
     } else if (command[0] == 'I') {
 
+        printf("INFIXA:\n");
         /* code */
 
     } else if (command[0] == 'R') {

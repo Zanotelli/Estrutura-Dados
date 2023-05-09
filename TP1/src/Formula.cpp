@@ -20,12 +20,10 @@ Formula::Formula(char * formula, bool isInfix) {
     try{
         if( isInfix ){
 
-            printf("In fixa \n");
             buildFromInFix(formula);
 
         } else{
 
-            printf("Pos fixa \n");
             buildFromPosFix(formula);
 
         }
@@ -145,7 +143,7 @@ void Formula::Solve(){
 
     double solution = solveQueue(&queue);
     
-    printf("# %f \n", solution);
+    printf("VAL: %f \n", solution);
 }
 
 double Formula::solveQueue(Queue<char*> * queue){

@@ -5,7 +5,7 @@ FileReader::FileReader(const char * filePath)
     FILE *file;
     file = fopen(filePath, "r");
 
-    char line[200];
+    char line[2000];
     int count = 0;
 
     if(file == NULL) 
@@ -13,7 +13,6 @@ FileReader::FileReader(const char * filePath)
 
     while ( fgets(line, sizeof(line), file))
     {
-        //printf("%s", line);
         strcpy(data[count], line);
         count++;
     }
