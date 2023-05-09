@@ -143,7 +143,7 @@ void Formula::Solve(){
 
     double solution = solveQueue(&queue);
     
-    printf("VAL: %f \n", solution);
+    printf("%f \n", solution);
 }
 
 double Formula::solveQueue(Queue<char*> * queue){
@@ -185,5 +185,11 @@ double Formula::solveQueue(Queue<char*> * queue){
 void Formula::printPosFix(){
 
     tree.postOrderTrack(tree.getHead());
+    printf("\n");
+}
+
+void Formula::printInFix(){
+
+    tree.inOrderTrack(tree.getHead());
     printf("\n");
 }

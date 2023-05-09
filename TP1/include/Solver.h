@@ -22,6 +22,7 @@ class Solver
         void InFix();
         void Solve();
         void PrintPosfix();
+        void PrintInfix();
 
 };
 

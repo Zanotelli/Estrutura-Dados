@@ -45,11 +45,12 @@ void Solver::Execute(char * data) {
 
     } else if (command[0] == 'I') {
 
-        printf("INFIXA:\n");
-        /* code */
+        printf("INFIXA: ");
+        PrintInfix();
 
     } else if (command[0] == 'R') {
 
+        printf("VAL: ");
         Solve();
 
     } else {
@@ -101,4 +102,14 @@ void Solver::PrintPosfix(){
     }
 
     formula->printPosFix();
+}
+
+void Solver::PrintInfix(){
+
+     if(formula == NULL){
+        printf("ERROR: No formula on Solver memory!\n");
+        return;
+    }
+
+    formula->printInFix();
 }

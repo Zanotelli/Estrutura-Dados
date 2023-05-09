@@ -32,6 +32,16 @@ void BinaryTree::postOrderTrack(Node<char *> * node){
     }
 }
 
+void BinaryTree::inOrderTrack(Node<char *> * node){
+    if(node != nullptr) {
+        printf("(");
+        inOrderTrack(node->getLeft());
+        printf(" %s ", node->getData());
+        inOrderTrack(node->getRigth());
+        printf(")");
+    }
+}
+
 // INSERTS
 
 void BinaryTree::insert(Node<char *> * node){

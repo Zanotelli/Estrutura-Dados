@@ -21,6 +21,7 @@ class Formula
         void buildFromInFix (char *);
         void buildFromPosFix(char *);
         void printPosFix();
+        void printInFix();
     private:
         BinaryTree tree;
         double solveQueue(Queue<char*>*);
