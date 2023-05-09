@@ -42,7 +42,7 @@ int main() {
     {
         solver.Execute(reader.GetCommand(i));
     }
-    printf("________________________\n");
+    printf("\n________________________\n");
    
 
 

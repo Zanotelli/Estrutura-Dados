@@ -93,37 +93,31 @@ void Formula::buildFromInFix(char * formula) {
                 
             } else if (word[0] == ')') {
 
-                while (!stack.isEmpty() && stack.look()->getData()[0] != '(') {
-
-                    Node<char*> * op = stack.remove();
-
-                    if(stack.look()->getData()[0] != '('){
-
-                        Node<char*> * right = stack.remove();
-                        Node<char*> * left = stack.remove();
-                        op->setLeft(left);
-                        op->setRigth(right);
-
-                    } else {
-                        stack.add(op);
-                        break;
-                    }
-
-                    stack.add(op);
-                }
-                delete node;
-
+                Node<char*> * right = stack.remove();
+                
                 if (!stack.isEmpty() && stack.look()->getData()[0] == '(') {
                     Node<char*> * aux = stack.remove();     // Remove '('
                     delete aux;
                 }
 
+                if(!stack.isEmpty() && stack.look()->getData()[0] != '(' ){
+                    
+                    Node<char*> * op = stack.remove();
+                    Node<char*> * left = stack.remove();
+                    
+                    op->setLeft(left);
+                    op->setRigth(right);
+                    
+                    stack.add(op);
+
+                } else {
+                    stack.add(right);
+                }
+
+                delete node;
+
             } else {
 
-                Node<char*> * r = stack.remove();
-                Node<char*> * l = stack.remove();
-                node->setRigth( r );
-                node->setLeft ( l );
                 stack.add(node);
 
             }
