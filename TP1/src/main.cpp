@@ -9,7 +9,7 @@
 
 int main() {
 
-    FileReader reader = FileReader("./entdouble.s2.n5.p.in");
+    FileReader reader = FileReader("./input.txt");
     Solver solver = Solver();
 
     for(int i = 0; i < reader.GetSize(); i++)
