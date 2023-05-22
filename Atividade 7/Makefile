@@ -4,19 +4,26 @@ SRC = src
 OBJ = obj
 INC = include
 BIN = bin
-OBJS = $(OBJ)/geraarvbin.o
+OBJS = $(OBJ)/Shellsort.o $(OBJ)/Heapsort.o $(OBJ)/main.o
+HDRS = $(INC)/Shellsort.h  $(INC)/Heapsort.h
 CFLAGS = -Wall -g -c -I$(INC)
 
-EXE = $(BIN)/geraarvbin
+EXE = $(BIN)/main
 
 run:  $(EXE)
-	$(EXE) -n 10 -o teste
+	$(EXE)
 
-$(BIN)/geraarvbin: $(OBJS)
-	$(CC) -pg -o $(BIN)/geraarvbin $(OBJS) $(LIBS)
+$(BIN)/main: $(OBJS)
+	$(CC) -pg -o $(BIN)/main $(OBJS) $(LIBS)
 
-$(OBJ)/geraarvbin.o: $(HDRS) $(SRC)/geraarvbin.c
-	$(CC) $(CFLAGS) -o $(OBJ)/geraarvbin.o $(SRC)/geraarvbin.c 
+$(OBJ)/main.o: $(HDRS) $(SRC)/main.cpp
+	$(CC) $(CFLAGS) -o $(OBJ)/main.o $(SRC)/main.cpp 
+
+$(OBJ)/Shellsort.o: $(HDRS) $(SRC)/Shellsort.cpp
+	$(CC) $(CFLAGS) -o $(OBJ)/Shellsort.o $(SRC)/Shellsort.cpp 
+
+$(OBJ)/Heapsort.o: $(HDRS) $(SRC)/Heapsort.cpp
+	$(CC) $(CFLAGS) -o $(OBJ)/Heapsort.o $(SRC)/Heapsort.cpp 
 
 clean:
 	rm -f $(EXE) $(OBJS) gmon.out
