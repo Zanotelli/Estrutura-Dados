@@ -1,0 +1,16 @@
+Estruturas de Dados
+Aula prática
+
+Amanda Guimarães Caixeta Silva - 2018020360
+Gabriel Camatta Zanotelli - 2018020140
+
+1. A ideia de geração do h a ser implementado será a seguinte: 
+- O h inicial será do tamanho do vetor
+- Caso uma quantidade par de trocas sejam realizadas, o próximo h será o h atual somado ao valor de h/2
+- Caso uma quantidade ímpar de trocas sejam realizadas, o próximo h será o h atual subitraindo o valor de h/2
+
+Para implementação dos testes, implementaremos um loop a ser executado 100 vezes. Para cada execução, será determinada
+de forma aleatória um valor positivo n. Este n corresponderá ao tamanho do vetor a ser ordenado. Em seguida, preencheremos
+cada posição do vetor com uma valor inteiro que, novamente, será determinado de forma aleatória. Cada rodada terá 
+o seu tempo de processamento preenchido em um arquivo de saída. Ao final, o arquivo também contará com o tempo médio
+das execuções.
