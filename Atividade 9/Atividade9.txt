@@ -1,0 +1,21 @@
+Estruturas de Dados
+Aula prática 9
+
+Amanda Guimarães Caixeta Silva - 2018020360
+Gabriel Camatta Zanotelli - 2018020140
+
+-----------------------------------------------------
+
+1. O critério de balanceamento que será utilizado 
+será o do número de nós de cada lado. Caso uma sub-arvore
+tenha 4 nós a mais que a outra, isso significará que
+um rebalanceamento será nescessário.
+
+2. Uma sub-arvore com uma quantidade muito maior de itens
+que a outra supõe o desbalanceamento. Manter o número
+de itens o mais próximo possível assegura um certo nível
+de equilíbrio entre os galhos
+
+3. No arquivo "avlorig.c", devemos modificar os métodos
+"insert" e "Delete" para que eles observem a quantidade de
+nós em cada sub-arvore em cada iteração
