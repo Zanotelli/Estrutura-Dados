@@ -1,11 +1,21 @@
-CC = g++
+#---------------------------------------------------------------------
+# Arquivo	: Makefile
+# Conteúdo	: compilar o programa vetop
+# Autor		: Wagner Meira Jr. (meira@dcc.ufmg.br)
+# Histórico	: 2022-04-02 - arquivo criado
+#---------------------------------------------------------------------
+# Opções	: make all - compila tudo
+#		: make clean - remove objetos e executável
+#---------------------------------------------------------------------
+
+CC = gcc
 LIBS = -lm
 SRC = src
 OBJ = obj
 INC = include
 BIN = bin
-OBJS = $(OBJ)/Shellsort.o $(OBJ)/Heapsort.o $(OBJ)/main.o
-HDRS = $(INC)/Shellsort.h  $(INC)/Heapsort.h
+OBJS = $(OBJ)/vet.o $(OBJ)/main.o
+HDRS = $(INC)/vet.h $(INC)/msgassert.h
 CFLAGS = -Wall -g -c -I$(INC)
 
 EXE = $(BIN)/main
@@ -14,16 +24,13 @@ run:  $(EXE)
 	$(EXE)
 
 $(BIN)/main: $(OBJS)
-	$(CC) -pg -o $(BIN)/main $(OBJS) $(LIBS)
+	$(CC) -g -o $(BIN)/main $(OBJS) $(LIBS)
 
 $(OBJ)/main.o: $(HDRS) $(SRC)/main.cpp
 	$(CC) $(CFLAGS) -o $(OBJ)/main.o $(SRC)/main.cpp 
-
-$(OBJ)/Shellsort.o: $(HDRS) $(SRC)/Shellsort.cpp
-	$(CC) $(CFLAGS) -o $(OBJ)/Shellsort.o $(SRC)/Shellsort.cpp 
-
-$(OBJ)/Heapsort.o: $(HDRS) $(SRC)/Heapsort.cpp
-	$(CC) $(CFLAGS) -o $(OBJ)/Heapsort.o $(SRC)/Heapsort.cpp 
+	
+$(OBJ)/vet.o: $(HDRS) $(SRC)/vet.c
+	$(CC) $(CFLAGS) -o $(OBJ)/vet.o $(SRC)/vet.c 
 
 clean:
 	rm -f $(EXE) $(OBJS) gmon.out
