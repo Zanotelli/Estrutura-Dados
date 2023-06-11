@@ -1,16 +1,17 @@
 #include "../include/Solver.h"
 
 Solver::Solver(){
-    data = NULL;
+    data = nullptr;
     size = 0;
 }
 
-Solver::Solver(int[][] data) {
+Solver::Solver(Point* inData) {
     /*
         implementar de alguma forma que o
         vetor tenha o tamanho certo no
         final
     */
+   data = inData;
 }
 
 Solver::~Solver(){

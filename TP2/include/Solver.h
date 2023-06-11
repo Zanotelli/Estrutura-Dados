@@ -4,17 +4,19 @@
 #include <cstdio>
 #include <stdexcept>
 
+#include "./Point.h"
+
 #define MAX_LENGTH 1000
 
 class Solver
 {
     public:
         Solver();
-        Solver(int[][]);
+        Solver(Point*);
         ~Solver();
         void execute();
     private:
-        int data[MAX_LENGTH][2];
+        Point* data;
         int size = 0;
         void printHeader();
 };

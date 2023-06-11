@@ -34,29 +34,26 @@ char * FileReader::getLine(int i)
     return data[i];
 }
 
-int[][] FileReader::getDataVector(){
+Point* FileReader::getPointVector(){
 
-    int vector[size][2];
+    Point vec[size];
 
     try{
 
         for(int i = 0; i < size; i++){
 
-            char * word = strtok(formula, " ");
-            int j = 0;
+            char* x = strtok(data[i], " ");
+            char* y = strtok(NULL, " ");
 
-            while(word != NULL){
-                vector[i][j] = atof(word);
-                j++;
-                word = strtok(NULL, " ");
-            }
+            Point point = new Point(x, y);
+            vec[i] = point;
         }
 
-    }catch(const std::exception & e){
+    } catch(const std::exception & e) {
 
         throw std::runtime_error("ERROR: Wrong data format on input file.");
 
 	}
 
-    return vector;
+    return vec;
 }
