@@ -18,9 +18,9 @@ Solver::Solver(Point* inData) {
         ++size;
     }
 
-    Point* data = new Point[size];
+    data = new Point[size];
     for (int i = 0; i < size; ++i) {
-        data[i] = inData[i];
+        data[i].set(inData[i].getX(), inData[i].getY());
     }
 }
 
@@ -44,6 +44,7 @@ void Solver::printData(){
 void Solver::execute() {
 
     clock_t start = clock();
+    graham(data, size, MERGE);
     clock_t end = clock();
     grahamMergeTime = start - end;
 

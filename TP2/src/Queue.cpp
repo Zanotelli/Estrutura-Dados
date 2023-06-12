@@ -40,7 +40,5 @@ int Queue<T>::getSize(){
     return size;
 }
 
-
-template class Queue<Node<char*>*>;
 template class Queue<char*>;
 template class Queue<Point*>;

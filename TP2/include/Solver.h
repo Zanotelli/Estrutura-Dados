@@ -9,6 +9,7 @@
 #include "Point.h"
 #include "Line.h"
 #include "Fecho.h"
+#include "Graham.h"
 
 #define MAX_LENGTH 1000
 
