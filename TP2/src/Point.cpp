@@ -29,6 +29,15 @@ int Point::getY(){
     return y;
 }
 
+void Point::set(int a, int b){
+    x = a;
+    y = b;
+}
+
 void Point::print(){
     printf("%d %d\n", x, y);
+}
+
+bool Point::isValid(){
+    return (x != 0) && (y != 0);
 }

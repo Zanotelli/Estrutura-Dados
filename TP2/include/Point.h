@@ -13,6 +13,8 @@ class Point{
         int getX();
         int getY();
         void print();
+        void set(int, int);
+        bool isValid();
     private:
         int x;
         int y;

@@ -3,6 +3,7 @@
 
 #include <cstdio>
 #include <stdexcept>
+#include <ctime>
 
 #include "Queue.h"
 #include "Point.h"
@@ -15,17 +16,18 @@ class Solver
 {
     public:
         Solver();
-        Solver(Queue<Point*>);
+        Solver(Point*);
         ~Solver();
         void execute();
+        void printData();
     private:
-        Queue<Point*> data;
-        Fecho fecho;
+        Point* data;
+        Fecho* fecho;
         int size = 0;
-        int grahamMergeTime;
-        int grahamInsertTime;
-        int grahamBucketTime;
-        int jarvisTime;
+        double grahamMergeTime;
+        double grahamInsertTime;
+        double grahamBucketTime;
+        double jarvisTime;
         void printSolution();
 };
 

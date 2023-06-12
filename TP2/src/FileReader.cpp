@@ -34,19 +34,18 @@ char * FileReader::getLine(int i)
     return data[i];
 }
 
-Queue<Point*> FileReader::getPointVector(){
+Point* FileReader::getPointVector(){
 
-    Queue<Point*> pointVec = new Queue();
+    Point* pointVec = new Point[MAX_DATA_LENGTH];
 
     try{
 
         for(int i = 0; i < size; i++){
 
-            char* x = strtok(data[i], " ");
-            char* y = strtok(NULL, " ");
+            int x = atof(strtok(data[i], " "));
+            int y = atof(strtok(NULL, " "));
 
-            Point point = new Point(x, y);
-            pointVec.add(point);
+            pointVec[i].set(x, y);
         }
 
     } catch(const std::exception & e) {

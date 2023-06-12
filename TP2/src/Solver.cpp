@@ -1,7 +1,7 @@
 #include "../include/Solver.h"
 
 Solver::Solver(){
-    data = new Queue();
+    data = nullptr;
     fecho = new Fecho();
     size = 0;
     grahamMergeTime = 0;
@@ -10,14 +10,18 @@ Solver::Solver(){
     jarvisTime = 0;
 }
 
-Solver::Solver(Queue<Point*> inData) {
-    data = inData;
+Solver::Solver(Point* inData) {
+    
     fecho = new Fecho();
-    size = data.getSize();
-    grahamMergeTime = 0;
-    grahamInsertTime = 0;
-    grahamBucketTime = 0;
-    jarvisTime = 0;
+    size = 0;
+    while (size < MAX_LENGTH && inData[size].isValid()) {
+        ++size;
+    }
+
+    Point* data = new Point[size];
+    for (int i = 0; i < size; ++i) {
+        data[i] = inData[i];
+    }
 }
 
 Solver::~Solver(){
@@ -26,8 +30,22 @@ Solver::~Solver(){
 }
 
 
+void Solver::printData(){
+    
+    printf("Tamanho: %d\n", size);
+    printf("Imprime todos os dados:\n");
+
+    for(int i = 0; i < size; i++){
+        printf("%d %d\n", data[i].getX(), data[i].getY());
+    }
+    printf("\n");
+}
+
 void Solver::execute() {
 
+    clock_t start = clock();
+    clock_t end = clock();
+    grahamMergeTime = start - end;
 
     printSolution();
 }
@@ -36,7 +54,7 @@ void Solver::printSolution(){
     
     printf("FECHO CONVEXO:\n");
    
-    fecho.print();
+    fecho->print();
    
     printf("\n");
     printf("GRAHAM+MERGESORT: %.3fs\n", grahamMergeTime/1000);

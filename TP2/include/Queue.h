@@ -1,7 +1,6 @@
 #ifndef QUEUE_H
 #define QUEUE_H
 
-#include "Node.h"
 #include "Point.h"
 
 template <class T>
