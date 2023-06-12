@@ -1,36 +1,46 @@
 #include "../include/Solver.h"
 
 Solver::Solver(){
-    data = nullptr;
+    data = new Queue();
+    fecho = new Fecho();
     size = 0;
+    grahamMergeTime = 0;
+    grahamInsertTime = 0;
+    grahamBucketTime = 0;
+    jarvisTime = 0;
 }
 
-Solver::Solver(Point* inData) {
-    /*
-        implementar de alguma forma que o
-        vetor tenha o tamanho certo no
-        final
-    */
-   data = inData;
+Solver::Solver(Queue<Point*> inData) {
+    data = inData;
+    fecho = new Fecho();
+    size = data.getSize();
+    grahamMergeTime = 0;
+    grahamInsertTime = 0;
+    grahamBucketTime = 0;
+    jarvisTime = 0;
 }
 
 Solver::~Solver(){
-    delete formula;
+    delete fecho;
+    delete data;
 }
 
 
 void Solver::execute() {
 
 
-    printHeader();
+    printSolution();
 }
 
-void Solver::printHeader(){
+void Solver::printSolution(){
     
     printf("FECHO CONVEXO:\n");
-
-    for(int i = 0; i < size; i++){
-        printf("%d %d\n", data[i][0], data[i][1]);
-    }
+   
+    fecho.print();
+   
     printf("\n");
+    printf("GRAHAM+MERGESORT: %.3fs\n", grahamMergeTime/1000);
+    printf("GRAHAM+INSERTIONSORT: %.3fs\n", grahamInsertTime/1000);
+    printf("GRAHAM+BUCKETSORT: %.3fs\n", grahamBucketTime/1000);
+    printf("JARVIS: %.3fs\n", jarvisTime/1000);
 }

@@ -4,7 +4,10 @@
 #include <cstdio>
 #include <stdexcept>
 
-#include "./Point.h"
+#include "Queue.h"
+#include "Point.h"
+#include "Line.h"
+#include "Fecho.h"
 
 #define MAX_LENGTH 1000
 
@@ -12,13 +15,18 @@ class Solver
 {
     public:
         Solver();
-        Solver(Point*);
+        Solver(Queue<Point*>);
         ~Solver();
         void execute();
     private:
-        Point* data;
+        Queue<Point*> data;
+        Fecho fecho;
         int size = 0;
-        void printHeader();
+        int grahamMergeTime;
+        int grahamInsertTime;
+        int grahamBucketTime;
+        int jarvisTime;
+        void printSolution();
 };
 
 #endif

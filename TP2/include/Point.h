@@ -2,9 +2,7 @@
 #define POINT_H
 
 #include <stdexcept>
-
-#define MAX_DATA_LENGTH 1001
-#define MAX_COMMAND_LENGTH 100
+#include <iostream>
 
 class Point{
     public:
@@ -14,6 +12,7 @@ class Point{
         ~Point();
         int getX();
         int getY();
+        void print();
     private:
         int x;
         int y;

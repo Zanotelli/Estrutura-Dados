@@ -34,9 +34,9 @@ char * FileReader::getLine(int i)
     return data[i];
 }
 
-Point* FileReader::getPointVector(){
+Queue<Point*> FileReader::getPointVector(){
 
-    Point vec[size];
+    Queue<Point*> pointVec = new Queue();
 
     try{
 
@@ -46,7 +46,7 @@ Point* FileReader::getPointVector(){
             char* y = strtok(NULL, " ");
 
             Point point = new Point(x, y);
-            vec[i] = point;
+            pointVec.add(point);
         }
 
     } catch(const std::exception & e) {
@@ -55,5 +55,5 @@ Point* FileReader::getPointVector(){
 
 	}
 
-    return vec;
+    return pointVec;
 }

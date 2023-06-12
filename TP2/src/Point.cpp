@@ -28,3 +28,7 @@ int Point::getX(){
 int Point::getY(){
     return y;
 }
+
+void Point::print(){
+    printf("%d %d\n", x, y);
+}
