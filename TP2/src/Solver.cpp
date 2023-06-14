@@ -41,25 +41,58 @@ void Solver::printData(){
     printf("\n");
 }
 
-void Solver::execute() {
+Point* Solver::createAuxData() {
 
+    Point* auxData = new Point[size];
+    for(int i = 0; i < size; i++){
+        auxData[i] = Point(data[i].getX(), data[i].getY());
+    }
+    return auxData;
+}
+
+void Solver::execute() {
+ 
+    Point* auxData = createAuxData();
+
+    // Mergesort
     clock_t start = clock();
-    graham(data, size, MERGE);
+    graham(auxData, size, 'M');
     clock_t end = clock();
+    grahamMergeTime = start - end; 
+
+    printf("----------\n");
+
+    // Insertionsort
+    auxData = createAuxData();
+    start = clock();
+    graham(auxData, size, 'I');
+    end = clock();
     grahamMergeTime = start - end;
 
+    printf("----------\n");
+
+    // Jarvis
+    printf("\n");
+    auxData = createAuxData();
+    start = clock();
+    result = jarvis(auxData, size);
+    end = clock();
+    jarvisTime = start - end;
+
     printSolution();
+
 }
 
 void Solver::printSolution(){
     
     printf("FECHO CONVEXO:\n");
    
-    fecho->print();
+    for(size_t i = 0; i < (sizeof(result)/sizeof(Point*)); i++){
+        printf("%d %d\n", result[i].getX(), result[i].getY());
+    }
    
     printf("\n");
     printf("GRAHAM+MERGESORT: %.3fs\n", grahamMergeTime/1000);
     printf("GRAHAM+INSERTIONSORT: %.3fs\n", grahamInsertTime/1000);
-    printf("GRAHAM+BUCKETSORT: %.3fs\n", grahamBucketTime/1000);
     printf("JARVIS: %.3fs\n", jarvisTime/1000);
 }

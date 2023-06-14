@@ -4,8 +4,8 @@ SRC = src
 OBJ = obj
 INC = include
 BIN = bin
-OBJS = $(OBJ)/FileReader.o $(OBJ)/Solver.o $(OBJ)/Queue.o $(OBJ)/Stack.o $(OBJ)/Point.o $(OBJ)/Line.o $(OBJ)/Fecho.o $(OBJ)/Graham.o $(OBJ)/main.o
-HDRS = $(INC)/FileReader.h $(INC)/Solver.h $(INC)/Queue.h $(INC)/Stack.h $(INC)/Point.h $(INC)/Line.h $(INC)/Fecho.h $(INC)/Graham.h
+OBJS = $(OBJ)/FileReader.o $(OBJ)/SorterDic.o $(OBJ)/Solver.o $(OBJ)/Queue.o $(OBJ)/Stack.o $(OBJ)/Point.o $(OBJ)/Line.o $(OBJ)/Fecho.o $(OBJ)/Graham.o $(OBJ)/Jarvis.o $(OBJ)/main.o
+HDRS = $(INC)/FileReader.h $(INC)/SorterDic.h $(INC)/Solver.h $(INC)/Queue.h $(INC)/Stack.h $(INC)/Point.h $(INC)/Line.h $(INC)/Fecho.h $(INC)/Graham.h $(INC)/Jarvis.h
 CFLAGS = -Wall -g -c -I$(INC)
 
 EXE = $(BIN)/main
@@ -42,6 +42,12 @@ $(OBJ)/Fecho.o: $(HDRS) $(SRC)/Fecho.cpp
 
 $(OBJ)/Graham.o: $(HDRS) $(SRC)/Graham.cpp
 	$(CC) $(CFLAGS) -o $(OBJ)/Graham.o $(SRC)/Graham.cpp 
+
+$(OBJ)/Jarvis.o: $(HDRS) $(SRC)/Jarvis.cpp
+	$(CC) $(CFLAGS) -o $(OBJ)/Jarvis.o $(SRC)/Jarvis.cpp 
+
+$(OBJ)/SorterDic.o: $(HDRS) $(SRC)/SorterDic.cpp
+	$(CC) $(CFLAGS) -o $(OBJ)/SorterDic.o $(SRC)/SorterDic.cpp 
 
 clean:
 	rm -f $(EXE) $(OBJS) gmon.out

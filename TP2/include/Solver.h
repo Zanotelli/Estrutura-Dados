@@ -10,6 +10,7 @@
 #include "Line.h"
 #include "Fecho.h"
 #include "Graham.h"
+#include "Jarvis.h"
 
 #define MAX_LENGTH 1000
 
@@ -23,13 +24,14 @@ class Solver
         void printData();
     private:
         Point* data;
+        Point* result;
         Fecho* fecho;
         int size = 0;
         double grahamMergeTime;
         double grahamInsertTime;
-        double grahamBucketTime;
         double jarvisTime;
         void printSolution();
+        Point* createAuxData();
 };
 
 #endif

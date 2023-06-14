@@ -1,10 +1,10 @@
-#ifndef SOLVER_H
-#define SOLVER_H
+#ifndef SORTERDIC_H
+#define SORTERDIC_H
 
 #include "Point.h"
 
-void mergeSort(Point points[], int size);
-void insertionSort(Point points[], int size, Point& pZero);
-void bucketSort(Point points[], int size, Point& pZero);
+void mergeSort(Point* points, int size);
+void insertionSort(Point*, int, Point);
+void bucketSort(Point*, int, Point&);
 
 #endif

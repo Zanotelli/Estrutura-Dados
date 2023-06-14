@@ -55,3 +55,4 @@ int Stack<T>::GetTamanho(){
 template class Stack<char*>;
 template class Stack<double>;
 template class Stack<Point*>;
+template class Stack<Point>;

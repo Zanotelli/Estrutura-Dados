@@ -1,4 +1,4 @@
-#include "../include/SorterDic.h"
+#include "../include/Graham.h"
 
 // A utility function to swap two points
 void swap(Point& p1, Point& p2){
@@ -7,11 +7,19 @@ void swap(Point& p1, Point& p2){
     p2 = temp;
 }
 
-int compare(const void *vp1, const void *vp2){
-    return 0;
+Point nextToTop(Stack<Point>& S)
+{
+    Point p = S.look();
+    S.remove();
+    Point res = S.look();
+    S.add(p);
+    return res;
 }
 
-void graham(Point points[], int size, Sorters sort){
+
+void graham(Point* points, int size, char sort){
+
+    if (size < 3) throw std::runtime_error("ERROR: Fecho Convexo impossível.");
 
     // Acha o ponto com Y mais baixo
     int ymin = points[0].getY(), min = 0;
@@ -21,18 +29,42 @@ void graham(Point points[], int size, Sorters sort){
         if ((y < ymin) || (ymin == y && points[i].getX() < points[min].getX()))
             ymin = points[i].getY(), min = i;
     }
- 
+    
     // Coloca esse ponto como 1º
     swap(points[0], points[min]);
 
     // Ordena os pontos
-    if(sort == MERGE){
+    if(sort == 'M'){
         mergeSort(points, size);
-    } else if(sort == INSERT){
-        insertionSort(&points[1], size, points[0]);
-    } else if(sort == BUCKET){
-        bucketSort(&points[1], size, points[0])
+    } else if(sort == 'I'){
+        insertionSort(points, size, points[0]);
+    } else if(sort == 'B'){
+        //bucketSort(&points[1], size, points[0]);
     }
 
+    Stack<Point> S = Stack<Point>();
+    S.add(points[0]);
+    S.add(points[1]);
+    S.add(points[2]);
+ 
+    // Process remaining n-3 points
+	try{
+        for (int i = 3; i < size; i++) {
+            while (orientation(nextToTop(S), S.look(), points[i]) != 2){
+                S.remove();
+            }
+            S.add(points[i]);
+        }
+    }catch(const std::exception & e){
+		throw std::runtime_error(e.what());
+	}
+
+    // Now stack has the output points, print contents of stack
+    while (!S.isEmpty())
+    {
+        Point p = S.remove();
+        printf("%d %d\n", p.getX(), p.getY());
+    }
+    printf("\n");
 
 }
