@@ -26,3 +26,11 @@ Point* Line::getInit(){
 Point* Line::getEnd(){
     return end;
 }
+
+
+// Outro 
+
+void Line::print(){
+    init->print();
+    end->print();
+}

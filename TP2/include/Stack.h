@@ -17,8 +17,8 @@ class Stack {
 		T remove();
 		T look();
 		bool isEmpty();
-		int GetTamanho();
-		void printStack();
+		int getSize();
+		void invert();
 	private:
         static const int MAXTAM = 200;
         T itens[MAXTAM];	

@@ -11,7 +11,7 @@ CFLAGS = -Wall -g -c -I$(INC)
 EXE = $(BIN)/main
 
 run:  $(EXE)
-	$(EXE)
+	$(EXE) ./ENTRADA1000.txt
 
 $(BIN)/main: $(OBJS)
 	$(CC) -pg -o $(BIN)/main $(OBJS) $(LIBS)

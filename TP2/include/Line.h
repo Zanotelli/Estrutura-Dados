@@ -12,6 +12,7 @@ class Line{
         ~Line();
         Point* getInit();
         Point* getEnd();
+        void print();
     private:
         Point* init;
         Point* end;

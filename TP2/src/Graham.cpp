@@ -17,7 +17,7 @@ Point nextToTop(Stack<Point>& S)
 }
 
 
-void graham(Point* points, int size, char sort){
+Fecho graham(Point* points, int size, char sort){
 
     if (size < 3) throw std::runtime_error("ERROR: Fecho Convexo impossível.");
 
@@ -50,21 +50,36 @@ void graham(Point* points, int size, char sort){
     // Process remaining n-3 points
 	try{
         for (int i = 3; i < size; i++) {
-            while (orientation(nextToTop(S), S.look(), points[i]) != 2){
+            while (orientation(nextToTop(S), S.look(), points[i]) != 2)
                 S.remove();
-            }
+            
             S.add(points[i]);
         }
     }catch(const std::exception & e){
 		throw std::runtime_error(e.what());
 	}
 
-    // Now stack has the output points, print contents of stack
+    Fecho hull = Fecho();
+    Point first = S.look();
+    Point p1;
+    Point p2;
+
+    S.invert();
     while (!S.isEmpty())
     {
-        Point p = S.remove();
-        printf("%d %d\n", p.getX(), p.getY());
+        p1 = S.remove();
+        if(!S.isEmpty()) 
+            p2 = S.look();
+        else
+            p2 = first;
+
+        Line* line = new Line(new Point(p1.getX(), p1.getY()), 
+                                new Point(p2.getX(), p2.getY()));
+        /* line->print();
+        printf("\n"); */
+        hull.add(line);
     }
-    printf("\n");
+
+    return hull;
 
 }

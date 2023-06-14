@@ -17,8 +17,6 @@ class Fecho{
     private:
         Line* fecho_convexo[MAX_DATA_LENGTH];
         int size;
-        int back;
-        int front;
 };
 
 #endif

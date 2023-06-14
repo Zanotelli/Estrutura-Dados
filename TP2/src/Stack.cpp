@@ -42,13 +42,27 @@ T Stack<T>::remove() {
 }
 
 template <class T>
+void Stack<T>::invert() {
+
+	T newStack[MAXTAM];
+
+	for(int i = tamanho-1; i >= 0; i--){
+		newStack[tamanho - i - 1] = itens[i];
+	}
+
+	for(int i = 0; i < tamanho; i++){
+		itens[i] = newStack[i];
+	}
+}
+
+template <class T>
 void Stack<T>::add(T item) {
 	itens[tamanho] = item;
 	tamanho++;
 }
 
 template <class T>
-int Stack<T>::GetTamanho(){
+int Stack<T>::getSize(){
 	return tamanho;
 }
 

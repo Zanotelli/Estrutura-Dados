@@ -2,17 +2,14 @@
 
 Solver::Solver(){
     data = nullptr;
-    fecho = new Fecho();
     size = 0;
     grahamMergeTime = 0;
     grahamInsertTime = 0;
-    grahamBucketTime = 0;
     jarvisTime = 0;
 }
 
 Solver::Solver(Point* inData) {
     
-    fecho = new Fecho();
     size = 0;
     while (size < MAX_LENGTH && inData[size].isValid()) {
         ++size;
@@ -25,8 +22,7 @@ Solver::Solver(Point* inData) {
 }
 
 Solver::~Solver(){
-    delete fecho;
-    delete data;
+    delete[] data;
 }
 
 
@@ -56,28 +52,24 @@ void Solver::execute() {
 
     // Mergesort
     clock_t start = clock();
-    graham(auxData, size, 'M');
+    fecho = graham(auxData, size, 'M');
     clock_t end = clock();
-    grahamMergeTime = start - end; 
-
-    printf("----------\n");
+    grahamMergeTime = end - start; 
 
     // Insertionsort
     auxData = createAuxData();
     start = clock();
     graham(auxData, size, 'I');
     end = clock();
-    grahamMergeTime = start - end;
-
-    printf("----------\n");
+    grahamMergeTime = end - start;
 
     // Jarvis
     printf("\n");
     auxData = createAuxData();
     start = clock();
-    result = jarvis(auxData, size);
+    jarvis(auxData, size);
     end = clock();
-    jarvisTime = start - end;
+    jarvisTime = end - start;
 
     printSolution();
 
@@ -87,9 +79,7 @@ void Solver::printSolution(){
     
     printf("FECHO CONVEXO:\n");
    
-    for(size_t i = 0; i < (sizeof(result)/sizeof(Point*)); i++){
-        printf("%d %d\n", result[i].getX(), result[i].getY());
-    }
+    fecho.print();
    
     printf("\n");
     printf("GRAHAM+MERGESORT: %.3fs\n", grahamMergeTime/1000);

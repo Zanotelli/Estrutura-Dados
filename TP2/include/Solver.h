@@ -24,8 +24,7 @@ class Solver
         void printData();
     private:
         Point* data;
-        Point* result;
-        Fecho* fecho;
+        Fecho fecho;
         int size = 0;
         double grahamMergeTime;
         double grahamInsertTime;

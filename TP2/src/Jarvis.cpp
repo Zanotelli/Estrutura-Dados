@@ -14,10 +14,7 @@ Point* jarvis(Point points[], int size){
     
     if (size < 3) throw std::runtime_error("ERROR: Fecho Convexo impossível.");
 
-    // Vetor de index
-    int hull [size];
-    for (int i = 0; i < size; i++)
-        hull[i] = -1;
+    Stack<Point> stack = Stack<Point>();
 
     // Acha o ponto mais a esquerda
     int left = 0;
@@ -25,30 +22,28 @@ Point* jarvis(Point points[], int size){
         if (points[i].getX() < points[left].getX())
             left = i;
 
-
     int p = left, q;
     do{
+        stack.add(points[p]);
         q = (p + 1) % size;
         for (int i = 0; i < size; i++)
             if (orientationJ(points[p], points[i], points[q]) == 2)
                 q = i;
 
-        hull[p] = q;
         p = q;
     } while (p != left);
 
-    int hullSize = 0;
-    for(int i = 0; i < size; i++)
-        if(hull[i] != -1)
-            hullSize++;
+
+    Point* result = new Point[stack.getSize()];
 
     int count = 0;
-    Point* result = new Point[hullSize];
-    for(int i = 0; i < size; i++)
-        if(hull[i] != -1){
-            result[count] = points[hull[i]];
-            count++;
-        }
+    while (!stack.isEmpty())
+    {
+        Point p = stack.remove();
+        result[count] = p;
+        //printf("%d %d\n", p.getX(), p.getY());
+        count++;
+    }
 
     return result;
 }
