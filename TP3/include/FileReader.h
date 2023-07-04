@@ -6,18 +6,17 @@
 #include <cstdio>
 #include <stdexcept>
 
-#define MAX_LINES 1000
-#define MAX_LINE_LENGHT 100
-
 class FileReader{
     public:
         FileReader(const char *);
-        int getSize();
-        char* getLine(int);
-        char* getDataStr();
+        ~FileReader();
+        char* getNextLine();
+        char getNextChar();
+        bool getIsOver();
     private:
-        char data[MAX_LINES][MAX_LINE_LENGHT];
-        int size = 0;
+        int count = 0;
+        FILE *file;
+        bool isOver;
 };
 
 #endif

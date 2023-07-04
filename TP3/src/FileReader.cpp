@@ -2,43 +2,45 @@
 
 FileReader::FileReader(const char * filePath)
 {
-    FILE *file;
+    
     file = fopen(filePath, "r");
 
-    char line[2000];
-    int count = 0;
-
     if(file == NULL) 
-		throw std::runtime_error("File not found");
+		throw std::runtime_error("ERROR: File not found");
 
-    while ( fgets(line, sizeof(line), file))
-    {
-        strcpy(data[count], line);
-        count++;
-    }
+    isOver = false;
+}
 
-    size = count;
-
+FileReader::~FileReader(){
     fclose(file);
 }
 
-int FileReader::getSize()
+
+char* FileReader::getNextLine()
 {
-    return size;
+    char* line;
+
+    if(fgets(line, sizeof(line), file) == NULL){
+        isOver = true;
+        return "";
+    }
+
+    return line;
 }
 
-char * FileReader::getLine(int i)
+char FileReader::getNextChar()
 {
-    if(i > size) 
-		  throw std::runtime_error("Command does not exist\n");
-    return data[i];
+    char c;
+
+    if(fread(&c, sizeof(char), 1, file) != 0){
+        printf("%c", c);
+        return c;
+    }
+
+    isOver = true;
+    return '\0';
 }
 
-char * FileReader::getDataStr() {
-
-    int n = 0;
-    char str[MAX_LINES * MAX_LINE_LENGHT];
-
-
-    return str;
+bool FileReader::getIsOver(){
+    return isOver;
 }

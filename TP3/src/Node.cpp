@@ -3,13 +3,17 @@
 Node::Node(){
     data = ' ';
     frequency = 0;
+    type = 'l';
     left = nullptr;
     right = nullptr;
+    next = nullptr;
 }
 
-Node::Node(char dat, int freq){
+Node::Node(char dat){
     data = dat;
-    frequency = freq;
+    frequency = 1;
+    type = 'l';
     left = nullptr;
     right = nullptr;
+    next = nullptr;
 }

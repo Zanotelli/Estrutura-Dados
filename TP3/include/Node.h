@@ -4,12 +4,14 @@
 struct Node {
     public:
         Node();
-        Node(char, int);
-    private:
-        char data;            // Character
-        int frequency;        // Frequency of the character
-        Node* left;      // Pointer to the left child
-        Node* right;     // Pointer to the right child
+        Node(char);
+        char data;        
+        int frequency;  
+        char type;   
+        char* code;      
+        Node* left;    
+        Node* right;    
+        Node* next;     
 };
 
 #endif

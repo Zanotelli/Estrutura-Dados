@@ -30,14 +30,9 @@ int main(int argc,char *argv[]) {
     // Lê o raquivo
     FileReader reader = FileReader(inpFileName);
 
-    Huffman huffman = Huffman();
-
     // Codifica / Decodifica
-    if(op){
-        huffman.encode( reader.getDataStr());
-    } else {
-        huffman.dencode(reader.getDataStr());
-    }
+    Huffman huffman = Huffman(reader);
+
 
     // Escreve no raquivo
     FileWriter writer = FileWriter(outFileName);
