@@ -33,3 +33,12 @@ char * FileReader::getLine(int i)
 		  throw std::runtime_error("Command does not exist\n");
     return data[i];
 }
+
+char * FileReader::getDataStr() {
+
+    int n = 0;
+    char str[MAX_LINES * MAX_LINE_LENGHT];
+
+
+    return str;
+}

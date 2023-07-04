@@ -5,7 +5,6 @@ struct Node {
     public:
         Node();
         Node(char, int);
-        ~Node();
     private:
         char data;            // Character
         int frequency;        // Frequency of the character
