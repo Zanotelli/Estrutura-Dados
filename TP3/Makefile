@@ -11,7 +11,7 @@ CFLAGS = -Wall -g -c -I$(INC)
 EXE = $(BIN)/main
 
 run:  $(EXE)
-	$(EXE) input.txt output.txt -c
+	$(EXE) output.txt input.txt -d
 
 $(BIN)/main: $(OBJS)
 	$(CC) -pg -o $(BIN)/main $(OBJS) $(LIBS)

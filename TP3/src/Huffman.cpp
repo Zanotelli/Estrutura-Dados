@@ -7,6 +7,7 @@ Node* root;
 FILE* fileIn;
 FILE* fileOut;
 unsigned char N;
+int numChars;
 
 /* Métodos */
 
@@ -25,8 +26,6 @@ void encode(const char* inFileName, const char* outFileName){
     makeTree();
     codefy(root, "\0");
 
-    // ===========
-
     fileIn = fopen(inFileName, "r");
     fileOut = fopen(outFileName, "w");
     if(fileOut == NULL) throw std::runtime_error("ERROR: Output file could not be oppened");
@@ -36,40 +35,60 @@ void encode(const char* inFileName, const char* outFileName){
     while(fread(&c,sizeof(char),1, fileIn)!=0)
         writeCode(c);
     
-    // ===========
+    fclose(fileIn);
+    fclose(fileOut);
+}
+
+void decode(const char* inFileName, const char* outFileName){
+
+    head = nullptr;
+    root = nullptr;
+    char padding;
+    char reader;
+    CodeType* codeTList;
+
+    // Abre o arquivo de entrada
+    fileIn = fopen(inFileName, "r");
+    if(fileIn == NULL) throw std::runtime_error("ERROR: Input file could not be oppened");
+
+    // Armazena o número de caracteres distintos
+    if(fread(&reader,sizeof(char),1, fileIn) == 0)
+        throw std::runtime_error("ERROR: Could not read the number N of distinct characters");    
+    numChars = (reader == 0) ? DISTINC_CHAR_MAX : reader;
+    printf("Detected: %d different characters\n", numChars);
+
+    // Lê os dados codificados para todos os caracteres
+    codeTList = (CodeType*) malloc(sizeof(CodeType) * numChars);
+    if(fread(codeTList, sizeof(CodeType) , numChars, fileIn) == 0)
+        throw std::runtime_error("ERROR: Counld not read the code table");
+
+    // Número de 0's a esquerda utilizados para codificação
+    if(fread(&reader, sizeof(char), 1, fileIn) == 0) 
+        throw std::runtime_error("ERROR: Invalid padding size");
+    padding = reader;      
+    printf("Detected: %c | %d bit padding.\n",padding,padding);
+
+    // Abre o aquivo de saída
+    fileOut = fopen(outFileName, "w");
+    if(fileOut == NULL) throw std::runtime_error("ERROR: Output file could not be oppened");
+
+    // Decodifica e escreve (um char por vez)
+    while(fread(&reader, sizeof(char), 1, fileIn) != 0) {
+
+        char* decoded = decodeData(reader, padding, codeTList);
+        
+        int i=0;
+        while(decoded[i] != '\0'){i++;};
+
+        fwrite(decoded, sizeof(char), i-1, fileOut);
+    }
 
     fclose(fileIn);
     fclose(fileOut);
 }
 
-void writeCode(char c){
 
-    char *code = getCode(c);
-    
-	while(*code!='\0'){
-		if(*code=='1')
-			writeBit(1);
-		else
-			writeBit(0);
-	    code++;
-	}
-	return;
-}
-
-char* getCode(char ch) {
-    
-    Node* p = head;
-	while(p != NULL) {
-
-	    if(p->data == ch)
-		  return p->code;
-	    p = p->next;
-	}
-	return NULL;
-}
-
-
-/* Auxiliares */
+/* Auxiliares Codificação */
 
 void insert(Node *p, Node *m) { 
 
@@ -229,7 +248,7 @@ void outPutHeader() {
         N=i;
 
     fwrite(&N,sizeof(unsigned char),1, fileOut);
-    printf("\nN = %u",i);
+    printf("N = %u\n",i);
 
     p = head;
     while(p!=NULL){
@@ -240,6 +259,8 @@ void outPutHeader() {
         
         p=p->next;
     }
+
+    
     
     char padding = 8 - (char)temp;
 
@@ -272,3 +293,93 @@ void writeBit(int b) {
 	return;
 }
 
+void writeCode(char c){
+
+    char *code = getCode(c);
+    
+	while(*code!='\0'){
+		if(*code=='1')
+			writeBit(1);
+		else
+			writeBit(0);
+	    code++;
+	}
+	return;
+}
+
+char* getCode(char ch) {
+    
+    Node* p = head;
+	while(p != NULL) {
+
+	    if(p->data == ch)
+		  return p->code;
+	    p = p->next;
+	}
+	return NULL;
+}
+
+
+/* Auxiliares Decodificação */
+
+char* decodeData(char b, char padding, CodeType* codeTList){
+
+    int j=0,t;
+    static int k;
+    static int buffer;
+    char* decoded = (char*) malloc(CODE_SIZE * sizeof(char));
+
+
+    t=(int)b;
+    t=t & 0x00FF;
+    t=t<<8-k;
+    buffer=buffer | t;
+    k=k+8;
+
+    if(padding!=0)
+    {buffer=buffer<<padding;
+    k=8-padding;
+    padding=0;}
+
+    int i = 0;
+    while(i < numChars)
+    {
+        if(!match(codeTList[i].code, int2string(buffer),k))
+        {	
+            decoded[j++] = codeTList[i].c;	//match found inserted decoded
+            t=strlen(codeTList[i].code);	//matched bits
+            buffer=buffer<<t;		//throw out matched bits
+            k=k-t;				//k will be less
+            i=0;				//match from initial record
+            //printf("\nBuffer=%s,removed=%c,k=%d",int2string(buffer),decoded[j-1],k);
+            if(k==0) break;
+            continue;
+        }
+    i++;
+    }
+
+    decoded[j]='\0';
+    return decoded;
+}
+
+int match(char a[],char b[],int size) {
+	b[strlen(a)] = '\0';
+	b[size] = '\0';
+	return strcmp(a,b);
+}
+
+char *int2string(int n) {
+    
+    int comparator, aux, count = 0;
+
+    char* temp=(char*) malloc(CODE_SIZE * sizeof(char));
+
+    for(int i = CODE_SIZE-1; i >= 0; i--){
+
+        comparator = 1<<i;
+        aux = (n & comparator);
+        if(aux==0) temp[count++]='0'; else temp[count++]='1';
+    }
+    temp[count]='\0';
+    return temp;
+}

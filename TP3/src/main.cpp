@@ -24,12 +24,10 @@ int main(int argc,char *argv[]) {
         throw std::runtime_error("ERROR: Invalid operation\n");
     }
 
-    if(op){
+    if(op)
         encode(input, output);
-    }
+    else
+        decode(input, output);
 
-
-
-    
     printf("Success!!\n");
 }
