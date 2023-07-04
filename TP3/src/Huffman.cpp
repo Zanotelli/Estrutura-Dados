@@ -51,16 +51,19 @@ void decode(const char* inFileName, const char* outFileName){
     fileIn = fopen(inFileName, "r");
     if(fileIn == NULL) throw std::runtime_error("ERROR: Input file could not be oppened");
 
+
     // Armazena o número de caracteres distintos
-    if(fread(&reader,sizeof(char),1, fileIn) == 0)
+    if(fread(&reader, sizeof(unsigned char), 1, fileIn) == 0)
         throw std::runtime_error("ERROR: Could not read the number N of distinct characters");    
     numChars = (reader == 0) ? DISTINC_CHAR_MAX : reader;
     printf("Detected: %d different characters\n", numChars);
+
 
     // Lê os dados codificados para todos os caracteres
     codeTList = (CodeType*) malloc(sizeof(CodeType) * numChars);
     if(fread(codeTList, sizeof(CodeType) , numChars, fileIn) == 0)
         throw std::runtime_error("ERROR: Counld not read the code table");
+
 
     // Número de 0's a esquerda utilizados para codificação
     if(fread(&reader, sizeof(char), 1, fileIn) == 0) 
