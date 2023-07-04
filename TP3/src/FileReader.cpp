@@ -3,10 +3,6 @@
 FileReader::FileReader(const char * filePath)
 {
     
-    file = fopen(filePath, "r");
-
-    if(file == NULL) 
-		throw std::runtime_error("ERROR: File not found");
 
     isOver = false;
 }

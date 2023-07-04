@@ -7,20 +7,26 @@
 #include <stdexcept>
 
 #include "Node.h"
-#include "FileReader.h"
 
-struct Huffman {
-    public:
-        Huffman(FileReader reader);
-        char * getData();
-    private:
-        Node* head;
-        Node* root;
-        void dencode(char*);
-        void encode(Node*, char*);
-        void addNode(char);
-        void insert(Node*, Node*);
-        void makeTree();
-};
+/* Objetos */
+typedef struct CodeType { 
+    char c;
+    char code[16];
+}CodeType;
+
+/* Métodos */
+void encode(const char*, const char*);
+
+/* Auxiliares */
+void insert(Node*, Node*);
+void addNode(char);
+void makeTree();
+void codefy(Node*, char*);
+void writeBit(int b);
+void writeCode(char ch);
+char *getCode(char ch);
+
+void outPutHeader();
+
 
 #endif

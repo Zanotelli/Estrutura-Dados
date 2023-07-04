@@ -1,111 +1,100 @@
 #include "../include/Huffman.h"
 
-Huffman::Huffman(FileReader reader){
+
+/* Variáveis auxiliares */
+Node* head = nullptr;
+Node* root;
+FILE* fileIn;
+FILE* fileOut;
+unsigned char N;
+
+/* Métodos */
+
+void encode(const char* inFileName, const char* outFileName){
+
+    fileIn = fopen(inFileName, "r");
+    if(fileIn == NULL) throw std::runtime_error("ERROR: Input file could not be oppened");
+
     head = nullptr;
     root = nullptr;
     char c;
 
-    while(true){
-        c = reader.getNextChar();
+    while(fread(&c,sizeof(char),1, fileIn)!=0)
         addNode(c);
-        if(reader.getIsOver()){
-            break;
-        }
-    };
 
     makeTree();
-    encode(root, "\0");	
-}
+    codefy(root, "\0");
 
+    // ===========
 
-void Huffman::dencode(char * data){
+    fileIn = fopen(inFileName, "r");
+    fileOut = fopen(outFileName, "w");
+    if(fileOut == NULL) throw std::runtime_error("ERROR: Output file could not be oppened");
 
+    outPutHeader();
+
+    while(fread(&c,sizeof(char),1, fileIn)!=0)
+        writeCode(c);
     
+    // ===========
+
+    fclose(fileIn);
+    fclose(fileOut);
 }
 
-char* Huffman::getData(){
+void writeCode(char c){
 
+    char *code = getCode(c);
     
+	while(*code!='\0'){
+		if(*code=='1')
+			writeBit(1);
+		else
+			writeBit(0);
+	    code++;
+	}
+	return;
 }
 
-
-
-// Aux
-
-void Huffman::makeTree(){
+char* getCode(char ch) {
     
     Node* p = head;
-    Node* q;
-    printf("\nmake tree begin\n");
-	while(p != nullptr) {
+	while(p != NULL) {
 
-		q = new Node('@');
-
-		q->type = 'i';
-		q->left = p;
-		q->frequency = p->frequency;
-
-		if(p->next!=NULL) {
-			p = p->next;
-			q->right = p;
-			q->frequency += p->frequency;
-		}
-
-		p = p->next;
-
-		if( p == nullptr) break;
-        
-        
-		if(q->frequency <= p->frequency){
-			q->next = p;
-			p = q;
-		} else
-			insert(q,p);
+	    if(p->data == ch)
+		  return p->code;
+	    p = p->next;
 	}
-
-	root = q;
-    printf("make tree end\n\n");
+	return NULL;
 }
 
-void Huffman::encode(Node *p,char* code){
 
-    char *lcode,*rcode;
-    static Node* s;
-    static int flag;
+/* Auxiliares */
 
-    if(p != nullptr){
-    
-        if(p->type == 'l'){	
-            if(flag ==0 ) {
-                flag = 1; 
-                head = p;
-            }else { 
-                s->next = p;
-            }
-            p->next = nullptr;
-            s = p;
-        }
+void insert(Node *p, Node *m) { 
 
-        p->code = code;
-        
-        lcode = (char *)malloc(strlen(code)+2);
-        rcode = (char *)malloc(strlen(code)+2);
-        sprintf(lcode,"%s0",code);
-        sprintf(rcode,"%s1",code);
-        
-        encode(p->left,lcode);
-        encode(p->right,rcode);
+    if(m->next == nullptr) {
+        m->next = p; 
+        return;
     }
+
+    while(m->next->frequency < p->frequency) {  
+        m = m->next;
+        if(m->next == nullptr) {
+            m->next = p; 
+            return;
+        } 
+    }
+    p->next = m->next;
+    m->next = p;
 }
 
-void Huffman::addNode(char c){
+void addNode(char c){
 
     Node *p,*q,*m;
 
     if(head == nullptr){
-        printf("a\n");
         head = new Node(c);
-        printf("a\n");
         return;
     }
     
@@ -153,20 +142,133 @@ void Huffman::addNode(char c){
     
 }
 
-void Huffman::insert(Node *p,Node *m) { 
-    if(m->next == nullptr) {
-        m->next = p; 
-        return;
-    }
+void makeTree(){
+    
+    Node* p = head;
+    Node* q;
+    
+	while(p != nullptr) {
 
-    while(m->next->frequency < p->frequency) {  
-        m = m->next;
-        if(m->next==nullptr) {
-            m->next = p; 
-            return;
-        } 
-    }
+		q = new Node('@');
 
-    p->next = m->next;
-    m->next = p;
+		q->type = 'i';
+		q->left = p;
+		q->frequency = p->frequency;
+
+		if(p->next!=NULL) {
+			p = p->next;
+			q->right = p;
+			q->frequency += p->frequency;
+		}
+
+		p = p->next;
+
+		if( p == nullptr) break;
+        
+        
+		if(q->frequency <= p->frequency){
+			q->next = p;
+			p = q;
+		} else
+			insert(q,p);
+	}
+
+	root = q;
 }
+
+void codefy(Node *p,char* code){
+
+    char *lcode,*rcode;
+    static Node* s;
+    static int flag;
+
+    if(p != nullptr){
+    
+        if(p->type == 'l'){	
+            if(flag ==0 ) {
+                flag = 1; 
+                head = p;
+            }else { 
+                s->next = p;
+            }
+            p->next = nullptr;
+            s = p;
+        }
+
+        p->code = code;
+        
+        lcode = (char *)malloc(strlen(code)+2);
+        rcode = (char *)malloc(strlen(code)+2);
+        sprintf(lcode,"%s0",code);
+        sprintf(rcode,"%s1",code);
+        
+        codefy(p->left,lcode);
+        codefy(p->right,rcode);
+    }
+}
+
+void outPutHeader() {
+
+    CodeType codeT;
+    Node* p;
+    int temp = 0;
+    int i = 0;
+    p = head;
+
+    while(p != nullptr) {
+
+        temp += (strlen(p->code)) * (p->frequency);
+        temp %= 8;
+        i++;
+        p = p->next;
+    }
+
+    if(i == 256)
+        N=0;
+    else 
+        N=i;
+
+    fwrite(&N,sizeof(unsigned char),1, fileOut);
+    printf("\nN = %u",i);
+
+    p = head;
+    while(p!=NULL){
+
+        codeT.c = p->data;
+        strcpy(codeT.code, p->code);
+        fwrite(&codeT, sizeof(CodeType), 1, fileOut);
+        
+        p=p->next;
+    }
+    
+    char padding = 8 - (char)temp;
+
+    fwrite(&padding,sizeof(char), 1, fileOut);
+    for(i = 0; i < padding; i++)
+        writeBit(0);
+
+}
+
+void writeBit(int b) {
+
+	static char byte;
+	static int cnt;
+	char temp;
+    
+	if(b==1) {	
+        temp=1;
+		temp = temp<<(7-cnt);
+		byte = byte | temp;
+	}
+	cnt++;
+	
+	if(cnt==8) {
+        
+		fwrite(&byte,sizeof(char),1,fileOut);
+		cnt=0; 
+        byte=0;
+		return;
+	}
+	return;
+}
+

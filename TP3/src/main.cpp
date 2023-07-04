@@ -3,18 +3,15 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "../include/FileReader.h"
-#include "../include/FileWriter.h"
 #include "../include/Huffman.h"
-
 
 int main(int argc,char *argv[]) {
 
     if(argc <= 3)
 		throw std::runtime_error("ERROR: Invalid arguments\n");
 
-    const char* inpFileName = argv[1];
-    const char* outFileName = argv[2];
+    const char* input = argv[1];
+    const char* output = argv[2];
     int op;
 
 
@@ -27,16 +24,12 @@ int main(int argc,char *argv[]) {
         throw std::runtime_error("ERROR: Invalid operation\n");
     }
 
-    // Lê o raquivo
-    FileReader reader = FileReader(inpFileName);
-
-    // Codifica / Decodifica
-    Huffman huffman = Huffman(reader);
+    if(op){
+        encode(input, output);
+    }
 
 
-    // Escreve no raquivo
-    FileWriter writer = FileWriter(outFileName);
-    writer.writeToFile(huffman.getData());
+
     
     printf("Success!!\n");
 }
