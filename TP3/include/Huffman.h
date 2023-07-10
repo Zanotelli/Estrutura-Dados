@@ -8,8 +8,10 @@
 
 #include "Node.h"
 
+/* Variáveis auxiliares */
 #define DISTINC_CHAR_MAX 256
 #define CODE_SIZE 16
+
 
 /* Objetos */
 typedef struct CodeType { 
@@ -17,27 +19,26 @@ typedef struct CodeType {
     char code[CODE_SIZE];
 }CodeType;
 
+
 /* Métodos */
 void encode(const char*, const char*);
 void decode(const char*, const char*);
-void outPutHeader();
+
 
 /* Auxiliares Codificação */
 void insert(Node*, Node*);
-void addNode(char);
-void makeTree();
+void add2NodeQueue(char);
+void makeHuffmanTree();
 void codefy(Node*, char*);
 void writeBit(int);
 void writeCode(char);
 char *getCode(char);
+void writeHeader();
+
 
 /* Auxiliares Decodificação */
-char* decodeData(char, char, CodeType*);
-int match(char[], char[], int);
-char *int2string(int n);
-
-
-
-
+char* decodeData(char);
+int checkIfEquals(char[], char[], int);
+char *convertToStr(int n);
 
 #endif

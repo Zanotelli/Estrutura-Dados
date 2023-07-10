@@ -29,5 +29,5 @@ int main(int argc,char *argv[]) {
     else
         decode(input, output);
 
-    printf("Success!!\n");
+    printf("Finished Huffman encoding/decoding execution.\n");
 }
